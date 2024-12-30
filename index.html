@@ -1,11 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="stylesheet" href="index.css">
-    <meta charset="UTF-8">
+    <link href="/assets/icons/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
+    <link href="/assets/icons/favicon.svg" rel="icon" type="image/svg+xml"/>
+    <link href="/assets/icons/favicon.ico" rel="shortcut icon"/>
+    <link href="/assets/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+    <link href="/assets/icons/site.webmanifest" rel="manifest"/>
+    <meta content="Taruu" name="apple-mobile-web-app-title"/>
+    <meta content="Personal website of Taruu. Find my contacts, projects, and links to my social profiles like Discord, GitHub, and more."
+          name="description">
+    <meta content="Taruu, personal website, GitHub, VRchat, Telegram, projects, programming" name="keywords">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Taruu" name="author">
+    <meta content="index, follow" name="robots">
+    <meta content="index, follow" name="googlebot">
+    <meta content="English" name="language">
+    <meta content="light" name="color-scheme">
+    <meta content="#ff7d3f" name="theme-color">
+    <meta content="Taruu's Personal Website" property="og:title">
+    <meta content="Explore my projects, contacts, and social media links." property="og:description">
+    <meta content="https://taruu.ru/assets/images/taruu.png" property="og:image">
+    <meta content="https://taruu.ru" property="og:url">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Taruu's Personal Website" name="twitter:title">
+    <meta content="Explore my projects, contacts, and social media links." name="twitter:description">
+    <meta content="https://taruu.ru/assets/images/taruu.png" name="twitter:image">
+    <link href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css" rel="stylesheet">
+    <link href="assets/styles/index.css" rel="stylesheet">
+    <link href="assets/styles/fonts.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@300;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
     <title>Taruu site</title>
 </head>
 <body>
@@ -16,34 +40,53 @@
     <section class="my_contacts">
         <h2>My contacts</h2>
         <article>
-            <table>
-                <tr>
-                    <td>Discord</td>
-                    <td>.taruu</td>
-                </tr>
-                <tr>
-                    <td>GitHub</td>
-                    <td>
-                        <a target="_blank" href="https://github.com/Taruu">
-                            Taruu</a></td>
-                </tr>
-                <tr>
-                    <td>VRchat</td>
-                    <td><a target="_blank" href="https://vrchat.com/home/user/usr_95cbe9a9-f928-4807-8a26-6fffa042ef3b">Taruu</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Telegram</td>
-                    <td>
-                        <a target="_blank" href="https://t.me/taruu_max">@taruu_max</a></td>
-                </tr>
-                <tr>
-                    <td>Blog</td>
-                    <td>
-                        <a target="_blank" href="https://t.me/s/tailed_dev">@tailed_dev</a></td>
-                </tr>
+            <div class="profile">
+                <img alt="Taruu avatar" src="/assets/images/taruu.png">
+                <table>
+                    <tr>
+                        <td>Discord</td>
+                        <td>.taruu</td>
+                    </tr>
+                    <tr>
+                        <td>GitHub</td>
+                        <td>
+                            <a href="https://github.com/Taruu" rel="noopener noreferrer" target="_blank"
+                               title="Visit my GitHub profile">
+                                Taruu
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>VRChat</td>
+                        <td>
+                            <a href="https://vrchat.com/home/user/usr_95cbe9a9-f928-4807-8a26-6fffa042ef3b"
+                               rel="noopener noreferrer"
+                               target="_blank" title="Visit my VRChat profile">
+                                Taruu
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Telegram</td>
+                        <td>
+                            <a href="https://t.me/taruu_max" rel="noopener noreferrer" target="_blank"
+                               title="Visit my Telegram profile">
+                                @taruu_max
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Blog</td>
+                        <td>
+                            <a href="https://t.me/s/tailed_dev" rel="noopener noreferrer" target="_blank"
+                               title="Visit my Telegram blog channel">
+                                @tailed_dev
+                            </a>
+                        </td>
+                    </tr>
 
-            </table>
+                </table>
+            </div>
         </article>
     </section>
     <section class="my_projects">
@@ -52,48 +95,75 @@
         <article>
             <table>
                 <tr>
-                    <td><a target="_blank" href="https://thisfoxgirldoesnotexist.com/">thisfoxgirldoesnotexist.com</a></td>
+                    <td><a href="https://thisfoxgirldoesnotexist.com/" rel="noopener noreferrer" target="_blank"
+                           title="Foxes!">thisfoxgirldoesnotexist.com</a>
+                    </td>
                     <td>
-                        <div>This foxgirl does not exist. Foxgirl analog
+                        <p>This foxgirl does not exist. Foxgirl analog
                             "This Person Does Not Exist"
-                        </div>
+                        </p>
                     </td>
 
                 </tr>
                 <tr>
-                    <td><a target="_blank" href="https://github.com/Taruu/mailproxy-with-utils">mailproxy</a></td>
+                    <td><a href="https://github.com/Taruu/mailproxy-with-utils" rel="noopener noreferrer"
+                           target="_blank">mailproxy</a></td>
                     <td>
-                        <div>simple mail proxy for old programs.
-                        </div>
+                        <p>
+                            simple mail proxy for old programs.
+                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td><a target="_blank" href="https://taruu.github.io/xxhash_fast_hash_big_files/">xxhash browser demo</a></td>
                     <td>
-                        <div>demo for fastest file hash calculation in browser
-                        </div>
+                        <a href="https://taruu.github.io/xxhash_fast_hash_big_files/" rel="noopener noreferrer"
+                           target="_blank">
+                            xxhash browser demo
+                        </a>
+                    </td>
+                    <td>
+                        <p>
+                            demo for fastest file hash calculation in browser
+                        </p>
                     </td>
                 </tr>
                 <tr>
-                    <td><a href="https://radio.taruu.ru">radio.taruu.ru</a></td>
                     <td>
-                        <div>my music
-                        </div>
+                        <a href="https://radio.taruu.ru">radio.taruu.ru</a>
+                    </td>
+                    <td>
+                        <p>
+                            my music
+                        </p>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <ul>
-                            <li><a href="https://t.me/s/fox_folder">@fox_folder</a></li>
-                            <li><a href="https://t.me/s/cat_folder">@cat_folder</a></li>
-                            <li><a href="https://t.me/s/robot_folder">@robot_folder</a></li>
-                            <li><a href="https://t.me/s/ai_folder">@ai_folder</a></li>
-
+                            <li>
+                                <a href="https://t.me/s/fox_folder" rel="noopener noreferrer">
+                                    @fox_folder
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://t.me/s/cat_folder" rel="noopener noreferrer">
+                                    @cat_folder
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://t.me/s/robot_folder" rel="noopener noreferrer">
+                                    @robot_folder
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://t.me/s/ai_folder" rel="noopener noreferrer">
+                                    @ai_folder
+                                </a>
+                            </li>
                         </ul>
                     </td>
                     <td>
-                        <div>cute images
-                        </div>
+                        <p>cute images</p>
                     </td>
                 </tr>
             </table>
@@ -102,7 +172,7 @@
 
 </main>
 <footer>
-    <a href="https://www.youtube.com/watch?v=jofNR_WkoCE">What Does The Fox Say?</a>
+    <a href="https://www.youtube.com/watch?v=jofNR_WkoCE" rel="noopener noreferrer">What Does The Fox Say?</a>
 </footer>
 </body>
 </html>

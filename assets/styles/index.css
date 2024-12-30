@@ -1,0 +1,115 @@
+:root {
+    --main-color: #006363;
+    --accent-color: orange;
+    --background-color: #ffefd5;
+    --secondary-background-color: #e5d7bf;
+    --shadow-color: coral;
+    --text-color: cadetblue;
+    --box-shadow-color: rgba(0, 0, 0, 0.1);
+    --border-bottom-color: #ccc;
+}
+
+body {
+    font-family: 'Martel', serif;
+    background-color: var(--background-color);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    max-height: 20vh;
+}
+
+header h1 {
+    font-size: 15vh;
+    color: var(--accent-color);
+    text-shadow: 0 0 5px var(--shadow-color);
+    font-family: 'The Fox Tail', sans-serif;
+}
+
+.my_contacts, .my_projects {
+    min-width: 35vh;
+    min-height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 5vh auto;
+
+}
+
+.my_contacts h2, .my_projects h2 {
+    font-family: 'Martel', serif;
+    text-shadow: 0 0 5px var(--text-color);
+    letter-spacing: .09em;
+    font-size: 4vh;
+}
+
+.my_contacts article div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-end;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.my_contacts article img {
+    width: 25vh;
+    height: 25vh;
+    min-width: 10vh;
+    object-fit: contain;
+}
+
+.my_contacts article, .my_projects article {
+    background-color: var(--secondary-background-color);
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.my_contacts table, .my_projects table {
+    border-collapse: collapse;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--box-shadow-color);
+    min-width: 10vh;
+    padding: 1vh;
+}
+
+.my_contacts td, .my_projects td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border-bottom-color);
+}
+
+.my_contacts a, .my_projects a {
+    font-family: monospace;
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+}
+
+
+.my_projects ul {
+    padding: 0;
+    list-style: none;
+}
+
+/* Footer */
+footer {
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--main-color);
+}
+
+footer a {
+    font-size: 3vh;
+    color: var(--accent-color);
+    text-shadow: 0 0 5px var(--shadow-color);
+    letter-spacing: .09em;
+}
