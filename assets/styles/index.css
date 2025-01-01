@@ -12,35 +12,34 @@
 body {
     font-family: 'Martel', serif;
     background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
 }
 
 header {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    margin-bottom: 2vh;
     background-color: var(--main-color);
-    max-height: 20vh;
 }
 
 header h1 {
+    display: contents;
     font-size: 15vh;
     color: var(--accent-color);
-    text-shadow: 0 0 5px var(--shadow-color);
+    text-shadow: .035em 0 var(--shadow-color);
     font-family: 'The Fox Tail', sans-serif;
+    text-align: center;
 }
 
-.my_contacts, .my_projects {
-    min-width: 35vh;
-    min-height: 35vh;
+.info_tables {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    margin: 5vh auto;
-
 }
 
-.my_contacts h2, .my_projects h2 {
+.info_tables h2 {
     font-family: 'Martel', serif;
     text-shadow: 0 0 5px var(--text-color);
     letter-spacing: .09em;
@@ -56,25 +55,24 @@ header h1 {
     align-items: flex-end;
 }
 
-.my_contacts article img {
-    width: 25vh;
+.my_contacts article div img {
+    width: 20vh;
     height: 25vh;
-    min-width: 10vh;
     object-fit: contain;
 }
 
 .my_contacts article, .my_projects article {
     background-color: var(--secondary-background-color);
-    padding: 1rem;
     border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 2vh;
 }
 
 .my_contacts table, .my_projects table {
     border-collapse: collapse;
-    font-size: 1.5rem;
+    font-size: 1rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px var(--box-shadow-color);
-    min-width: 10vh;
     padding: 1vh;
 }
 
@@ -90,7 +88,6 @@ header h1 {
     padding: 2px 1px 0;
 }
 
-
 .my_projects ul {
     padding: 0;
     list-style: none;
@@ -98,13 +95,9 @@ header h1 {
 
 /* Footer */
 footer {
-    padding-top: 2.5vh;
-    padding-bottom: 2.5vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     background-color: var(--main-color);
+    width: 100%;
 }
 
 footer a {
