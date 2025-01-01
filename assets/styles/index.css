@@ -20,6 +20,7 @@ header {
     align-items: center;
     background-color: var(--main-color);
     max-height: 20vh;
+    width: 100%;
 }
 
 header h1 {
@@ -30,7 +31,7 @@ header h1 {
 }
 
 .my_contacts, .my_projects {
-    min-width: 35vh;
+    min-width: 35vw;
     min-height: 35vh;
     display: flex;
     flex-direction: column;
@@ -57,9 +58,9 @@ header h1 {
 }
 
 .my_contacts article img {
-    width: 25vh;
+    width: 25vw;
     height: 25vh;
-    min-width: 10vh;
+    min-width: 10vw;
     object-fit: contain;
 }
 
@@ -74,7 +75,7 @@ header h1 {
     font-size: 1.5rem;
     border-radius: 10px;
     box-shadow: 0 2px 5px var(--box-shadow-color);
-    min-width: 10vh;
+    min-width: 10vw;
     padding: 1vh;
 }
 
