@@ -55,6 +55,12 @@ header h1 {
     align-items: flex-end;
 }
 
+.my_contacts article div img {
+    width: 20vh;
+    height: 25vh;
+    object-fit: contain;
+}
+
 .my_contacts article, .my_projects article {
     background-color: var(--secondary-background-color);
     border-radius: 10px;
