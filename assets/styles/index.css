@@ -52,6 +52,7 @@
         /* Table colors */
         --table-shadow-color: rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
         --table-border-color: #666; /* Lighter border for dark mode */
+        --table-border-color: black;
     }
 }
 
@@ -211,4 +212,43 @@ footer a {
     .my_contacts article, .my_projects article {
         padding: 15px; /* Reduce article padding */
     }
+
+    .my_projects table {
+        border: none; /* Remove the outer table border */
+        box-shadow: none; /* Remove the outer table shadow */
+    }
+
+    .my_projects tr {
+        display: block; /* Each table row will behave like a block element */
+        margin-bottom: 15px; /* Add space between stacked projects */
+        border: 1px solid var(--table-border-color); /* Add a border around each project block */
+        border-radius: 5px; /* Optional: add rounded corners */
+        padding: 10px; /* Add padding inside each project block */
+    }
+
+    .my_projects td {
+        display: block; /* Each table cell will behave like a block element */
+        border-bottom: none; /* Remove the border between cells */
+        padding: 8px 0; /* Adjust padding for stacked cells */
+    }
+
+    /* Add labels to the stacked information using data attributes */
+    .my_projects td::before {
+        content: attr(data-label); /* Use the value of the data-label attribute as content */
+        font-weight: bold;
+        margin-right: 10px;
+        display: inline-block; /* Display labels inline with content */
+        min-width: 80px; /* Give labels a minimum width for alignment */
+    }
+
+    /* Ensure the last cell in a stacked row doesn't have bottom padding if needed */
+    .my_projects tr td:last-child {
+        padding-bottom: 0;
+    }
+
+    /* Optional: Adjust padding for the first cell if needed */
+    .my_projects tr td:first-child {
+        padding-top: 0;
+    }
+
 }
