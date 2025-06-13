@@ -30,6 +30,7 @@
     :root {
         /* Dark theme overrides */
         --body-bg-image: url("../images/hackerFoxScrible.webp"); /* Dark mode background image */
+        --article-bg-color: #c26000; /* Article background (stays light) */
 
         /* Header h1 colors */
         --h1-text-color: #ff7816; /* White text */
@@ -41,10 +42,10 @@
 
         /* General text color */
         --body-text-color: white; /* White text for the body (on dark background image) */
-        /* --article-text-color remains black for readability on the light article background */
+        --article-text-color : white;
 
         /* Link colors */
-        --link-color: #f47122; /* Lighter link color for dark theme */
+        --link-color: #8ce6ca; /* Lighter link color for dark theme */
         --footer-link-color: #ff7816; /* White footer link for contrast */
         /* --footer-shadow-color remains black */
 
