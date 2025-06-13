@@ -51,7 +51,6 @@
 
         /* Table colors */
         --table-shadow-color: rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
-        --table-border-color: #666; /* Lighter border for dark mode */
         --table-border-color: black;
     }
 }
@@ -227,7 +226,7 @@ footer a {
     }
 
     .my_projects td {
-        display: block; /* Each table cell will behave like a block element */
+        display: grid; /* Each table cell will behave like a block element */
         border-bottom: none; /* Remove the border between cells */
         padding: 8px 0; /* Adjust padding for stacked cells */
     }
