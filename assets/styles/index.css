@@ -1,17 +1,66 @@
 :root {
-    --main-color: #006363;
-    --accent-color: orange;
-    --background-color: #ffefd5;
-    --secondary-background-color: #e5d7bf;
-    --shadow-color: coral;
-    --text-color: cadetblue;
-    --box-shadow-color: rgba(0, 0, 0, 0.1);
-    --border-bottom-color: #ccc;
+    /* Light theme colors */
+    --main-bg-color: #006363; /* Header and footer background */
+    --article-bg-color: #e5d7bf; /* Article background (stays light) */
+    --body-bg-image: url("../images/hackerFox.webp"); /* Body background image */
+
+    /* Header h1 colors */
+    --h1-text-color: orange;
+    --h1-shadow-color: black;
+
+    /* Section h2 colors */
+    --h2-text-color: black; /* Black text for readability */
+    --h2-shadow-color: white; /* White outline for readability */
+
+    /* General text color */
+    --body-text-color: black; /* Default text color for the body */
+    --article-text-color: black; /* Text color specifically for inside articles */
+
+    /* Link colors */
+    --link-color: orange; /* Link color in articles/tables */
+    --footer-link-color: orange; /* Footer link color */
+    --footer-shadow-color: black; /* Footer link shadow */
+
+    /* Table colors */
+    --table-shadow-color: rgba(0, 0, 0, 0.1);
+    --table-border-color: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark theme overrides */
+        --body-bg-image: url("../images/hackerFoxScrible.webp"); /* Dark mode background image */
+
+        /* Header h1 colors */
+        --h1-text-color: #ff7816; /* White text */
+        --h1-shadow-color: black; /* Black outline */
+
+        /* Section h2 colors */
+        --h2-text-color: white; /* White text for readability */
+        --h2-shadow-color: black; /* Black outline for readability */
+
+        /* General text color */
+        --body-text-color: white; /* White text for the body (on dark background image) */
+        /* --article-text-color remains black for readability on the light article background */
+
+        /* Link colors */
+        --link-color: #f47122; /* Lighter link color for dark theme */
+        --footer-link-color: #ff7816; /* White footer link for contrast */
+        /* --footer-shadow-color remains black */
+
+        /* Table colors */
+        --table-shadow-color: rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
+        --table-border-color: #666; /* Lighter border for dark mode */
+    }
 }
 
 body {
     font-family: 'Martel', serif;
-    background-color: var(--background-color);
+    color: var(--body-text-color); /* Apply body text color */
+    background-image: var(--body-bg-image); /* Apply dynamic background image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Make background fixed so text scrolls over it */
     margin: 0;
     padding: 0;
 }
@@ -21,17 +70,24 @@ header {
     flex-direction: column;
     align-items: center;
     margin-bottom: 2vh;
-    background-color: var(--main-color);
+    background-color: var(--main-bg-color); /* Use main background color */
+    padding: 1vh 0; /* Add some padding */
 }
 
 header h1 {
-    display: contents;
+    display: contents; /* This makes the h1 not create a new block, allowing flexibility. Keep as is. */
     font-size: 15vh;
-    color: var(--accent-color);
-    text-shadow: .035em 0 var(--shadow-color);
+    color: var(--h1-text-color); /* Apply header h1 text color */
+    text-shadow: .035em 0 var(--h1-shadow-color); /* Apply header h1 shadow color */
     font-family: 'The Fox Tail', sans-serif;
     text-align: center;
+
 }
+
+main {
+    padding: 0 20px; /* Add horizontal padding to main content */
+}
+
 
 .info_tables {
     display: flex;
@@ -41,9 +97,12 @@ header h1 {
 
 .info_tables h2 {
     font-family: 'Martel', serif;
-    text-shadow: 0 0 5px var(--text-color);
+    color: var(--h2-text-color); /* Apply h2 text color */
+    -webkit-text-stroke: 2px var(--h2-shadow-color);
     letter-spacing: .09em;
     font-size: 4vh;
+    margin-bottom: 1vh; /* Add some space below h2 */
+
 }
 
 .my_contacts article div {
@@ -59,26 +118,33 @@ header h1 {
     width: 20vh;
     height: 25vh;
     object-fit: contain;
+    margin-right: 20px; /* Add space between image and table */
 }
 
 .my_contacts article, .my_projects article {
-    background-color: var(--secondary-background-color);
+    background-color: var(--article-bg-color); /* Use article background color */
     border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 2vh;
+    padding: 20px; /* Increase padding for better spacing */
+    margin-bottom: 4vh; /* Increase margin below articles */
+    color: var(--article-text-color); /* Apply article text color */
 }
 
 .my_contacts table, .my_projects table {
     border-collapse: collapse;
     font-size: 1rem;
     border-radius: 10px;
-    box-shadow: 0 2px 5px var(--box-shadow-color);
+    box-shadow: 0 2px 5px var(--table-shadow-color); /* Apply table shadow color */
     padding: 1vh;
+    overflow: hidden; /* Hide overflow for rounded corners */
 }
 
 .my_contacts td, .my_projects td {
-    padding: 0.5rem;
-    border-bottom: 1px solid var(--border-bottom-color);
+    padding: 0.75rem 1rem; /* Adjust padding */
+    border-bottom: 1px solid var(--table-border-color); /* Apply table border color */
+}
+
+.my_contacts tr:last-child td, .my_projects tr:last-child td {
+    border-bottom: none; /* Remove border from last row */
 }
 
 .my_contacts a, .my_projects a {
@@ -86,6 +152,7 @@ header h1 {
     outline: none;
     text-decoration: none;
     padding: 2px 1px 0;
+    color: var(--link-color); /* Apply link color */
 }
 
 .my_projects ul {
@@ -93,16 +160,54 @@ header h1 {
     list-style: none;
 }
 
+.my_projects ul li {
+    margin-bottom: 5px; /* Add space between list items */
+}
+
+
 /* Footer */
 footer {
     text-align: center;
-    background-color: var(--main-color);
+    background-color: var(--main-bg-color); /* Use main background color */
     width: 100%;
+    padding: 2vh 0; /* Add padding */
+    margin-top: 4vh; /* Add space above footer */
 }
 
 footer a {
     font-size: 3vh;
-    color: var(--accent-color);
-    text-shadow: 0 0 5px var(--shadow-color);
+    color: var(--footer-link-color); /* Apply footer link color */
+    text-shadow: 0 0 5px var(--footer-shadow-color); /* Apply footer link shadow color */
     letter-spacing: .09em;
+    text-decoration: none; /* Ensure no underline */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 10vh; /* Reduce font size on smaller screens */
+    }
+
+    .info_tables h2 {
+        font-size: 3vh; /* Reduce font size on smaller screens */
+        -webkit-text-stroke: 1px var(--h2-shadow-color);
+    }
+
+    .my_contacts article div {
+        flex-direction: column; /* Stack image and table on small screens */
+        align-items: center; /* Center stacked items */
+    }
+
+    .my_contacts article div img {
+        margin-right: 0; /* Remove margin when stacked */
+        margin-bottom: 20px; /* Add space below image */
+    }
+
+    main {
+        padding: 0 10px; /* Reduce padding on smaller screens */
+    }
+
+    .my_contacts article, .my_projects article {
+        padding: 15px; /* Reduce article padding */
+    }
 }
