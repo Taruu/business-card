@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Flexbox Layout</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            font-family: "Helvetian", serif;
+        }
+
+        .layout-container {
+            display: flex;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .sidebar-orange {
+            width: 30vw;
+            background-image: url(assets/icons/logo.svg);
+            background-size: auto 75%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .navbar-red {
+            background-color: #ff3333;
+            height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-red a {
+            color: #ffffff;
+            text-decoration: underline;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .content-black {
+            background-color: #000000;
+            color: #ffffff;
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            padding: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .layout-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .sidebar-orange {
+                width: 100%;
+                height: 15vh;
+            }
+
+            .content-black {
+                min-height: 300px;
+            }
+        }
+    </style>
+    <script>
+        const birth = new Date(1031515200000);
+        setInterval(() => {
+            const now = new Date();
+            const s = Math.floor((now - birth) / 1000);
+            const d = Math.floor(s / 86400);
+            const h = Math.floor((s % 86400) / 3600);
+            const m = Math.floor((s % 3600) / 60);
+            const sec = s % 60;
+            const y = Math.floor(d / 365.25);
+            document.getElementById('my-uptime').innerText =
+                `My uptime:\t${d}d, ${h}h, ${m}m, ${sec}s (${y}y ♍)`;
+        }, 1000);
+    </script>
+</head>
+<body>
+
+<div class="layout-container">
+    <div class="sidebar-orange"></div>
+    <div class="right-column">
+        <nav class="navbar-red">
+            <a href="#">Index</a>
+            <a href="#">Projects</a>
+            <a href="#">Webring</a>
+        </nav>
+        <main class="content-black">
+            <div>
+                <h1>Hello i am Taruu!</h1>
+                <div>
+                    <table>
+                        <caption>My Contacts:</caption>
+                        <tbody>
+                        <tr>
+                            <td>Telegram</td>
+                            <td>
+                                <a href="https://t.me/taruu_max" rel="noopener noreferrer" target="_blank">
+                                    @taruu_max
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Blog (tg)</td>
+                            <td>
+                                <a href="https://t.me/s/tailed_dev" rel="noopener noreferrer" target="_blank">
+                                    @tailed_dev
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Discord</td>
+                            <td><a href="https://discordapp.com/users/489145337701859328" rel="noopener noreferrer"
+                                   target="_blank">
+                                .taruu
+                            </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>GitHub</td>
+                            <td>
+                                <a href="https://github.com/Taruu" rel="noopener noreferrer" target="_blank">Taruu</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>VRChat</td>
+                            <td>
+                                <a href="https://vrchat.com/home/user/usr_95cbe9a9-f928-4807-8a26-6fffa042ef3b"
+                                   rel="noopener noreferrer">Taruu</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Matrix</td>
+                            <td>
+                                ...
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h4>Some facts about me:</h4>
+                    <ul>
+                        <li id="my-uptime">My uptime: 42d, 42h, 42m, 42s (42y ™️)</li>
+                        <li>I like fox girls</li>
+                        <li style="color: orange">I like orange</li>
+                        <li><a target="_blank" href="https://radio.taruu.ru">Check my radio</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+</body>
+</html>
