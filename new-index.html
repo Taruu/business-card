@@ -7,21 +7,23 @@
     <style>
         body {
             margin: 0;
-            background-color: white;
-            font-family: "Helvetian", serif;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: #0a4a6e url(frutiger_aero.webp) center/cover fixed;
+            background-size: 100vw;
+            backdrop-filter: blur(1ex);
         }
 
-        .layout-container {
+        .main-c {
             display: flex;
             height: 100vh;
             box-sizing: border-box;
-            padding: 20px;
-            gap: 20px;
+            padding: 1rem;
+            gap: 1rem;
         }
 
-        .sidebar-orange {
+        .side-img {
             width: 30vw;
-            background-image: url(assets/icons/logo.svg);
+            background-image: url(logo.svg);
             background-size: auto 75%;
             background-repeat: no-repeat;
             background-position: center;
@@ -34,8 +36,16 @@
             gap: 1rem;
         }
 
-        .navbar-red {
-            background-color: #ff3333;
+        .navbar {
+            border-radius: 1rem; /* Pill shape */
+
+            /* The "Gel" Gradient: Sharp transition at 50% creates the plastic look */
+            background: linear-gradient(to bottom,rgba(117,117,117,.7) 0,rgba(255,255,255,.1) 100%); /* Vibrant Base Color */
+
+            /* Shadows */
+            box-shadow:
+                    0 4px 10px rgba(0, 0, 0, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
             height: 3rem;
             display: flex;
             justify-content: center;
@@ -43,15 +53,16 @@
             gap: 1rem;
         }
 
-        .navbar-red a {
+        .navbar a {
             color: #ffffff;
             text-decoration: underline;
-            font-size: 1rem;
+            font-size: 2vh;
             font-weight: bold;
         }
 
-        .content-black {
-            background-color: #000000;
+        .content-m {
+            border-radius: 1rem;
+            background-color: #707376ba;
             color: #ffffff;
             flex: 1;
             display: flex;
@@ -62,32 +73,33 @@
         }
 
         @media (max-width: 600px) {
-            .layout-container {
+            .main-c {
                 flex-direction: column;
                 height: auto;
                 min-height: 100vh;
             }
 
-            .sidebar-orange {
+            .side-img {
                 width: 100%;
                 height: 15vh;
             }
 
-            .content-black {
+            .content-m {
                 min-height: 300px;
             }
         }
     </style>
     <script>
         const birth = new Date(1031515200000);
+        const f = Math.floor
         setInterval(() => {
             const now = new Date();
-            const s = Math.floor((now - birth) / 1000);
-            const d = Math.floor(s / 86400);
-            const h = Math.floor((s % 86400) / 3600);
-            const m = Math.floor((s % 3600) / 60);
+            const s = f((now - birth) / 1000);
+            const d = f(s / 86400);
+            const h = f((s % 86400) / 3600);
+            const m = f((s % 3600) / 60);
             const sec = s % 60;
-            const y = Math.floor(d / 365.25);
+            const y = f(d / 365.25);
             document.getElementById('my-uptime').innerText =
                 `My uptime:\t${d}d, ${h}h, ${m}m, ${sec}s (${y}y ♍)`;
         }, 1000);
@@ -95,15 +107,15 @@
 </head>
 <body>
 
-<div class="layout-container">
-    <div class="sidebar-orange"></div>
+<div class="main-c">
+    <div class="side-img"></div>
     <div class="right-column">
-        <nav class="navbar-red">
+        <nav class="navbar">
             <a href="#">Index</a>
             <a href="#">Projects</a>
             <a href="#">Webring</a>
         </nav>
-        <main class="content-black">
+        <main class="content-m">
             <div>
                 <h1>Hello i am Taruu!</h1>
                 <div>
