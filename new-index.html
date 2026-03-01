@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Flexbox Layout</title>
+    <title>Taruu site</title>
     <style>
         body {
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
-            background: #0a4a6e url(frutiger_aero.webp) center/cover fixed;
-            background-size: 100vw;
+            background: #0a4a6e url(frutiger_aero.webp) no-repeat;
+            background-size: cover;
             backdrop-filter: blur(1ex);
+            text-shadow: 5px 5px 5px #003C7899, 0 0 1rem #96E6FF66, #57575794 1px 1px 0;
+            text-decoration-color: #003d70;
+
+            font-size: 120%;
         }
 
-        .main-c {
+        .head-c {
             display: flex;
             height: 100vh;
             box-sizing: border-box;
@@ -21,15 +25,23 @@
             gap: 1rem;
         }
 
-        .side-img {
-            width: 30vw;
-            background-image: url(logo.svg);
-            background-size: auto 75%;
-            background-repeat: no-repeat;
-            background-position: center;
+        .boxsh {
+            box-shadow: 0 6px 24px #32B4FF59, 0 0 40px #64FFC81A, inset 0 2px 3px #FFFFFFD9;
+            background: linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            backdrop-filter: blur(20px) saturate(180%);
         }
 
-        .right-column {
+        .side-img {
+            width: 30vw;
+            background: url(logo.svg) center/75% no-repeat, linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            border: 2px solid #FFFFFF99;
+            border-radius: 1rem;
+
+            position: relative;
+            overflow: hidden
+        }
+
+        .main-c {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -37,46 +49,79 @@
         }
 
         .navbar {
-            border-radius: 1rem; /* Pill shape */
-
-            /* The "Gel" Gradient: Sharp transition at 50% creates the plastic look */
-            background: linear-gradient(to bottom,rgba(117,117,117,.7) 0,rgba(255,255,255,.1) 100%); /* Vibrant Base Color */
-
-            /* Shadows */
-            box-shadow:
-                    0 4px 10px rgba(0, 0, 0, 0.2),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            height: 3rem;
+            border: 2px solid #FFFFFFA6;
+            border-radius: 14px;
+            padding: 10px;
             display: flex;
+            gap: 6px;
+            position: relative;
+            overflow: clip;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
-            gap: 1rem;
         }
 
         .navbar a {
-            color: #ffffff;
-            text-decoration: underline;
-            font-size: 2vh;
-            font-weight: bold;
+
+            flex: 1 1 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            white-space: normal;
+            word-wrap: break-word;
+
+
+            position: relative;
+            background: linear-gradient(
+                    135deg,
+                    #FFFFFFCC 0%,
+                    #DCF8FF99 50%,
+                    #B4F0FFB2 100%
+            );
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+            padding: 1vw;
+            font-size: 2ex;
+            color: #003d70;
+
+            font-weight: 700;
+
+
+            box-shadow: 0 4px 15px rgba(80, 180, 255, 0.4),
+            0 0 30px rgba(150, 255, 220, 0.2),
+            inset 0 2px 4px rgba(255, 255, 255, 1),
+            inset 0 -2px 4px rgba(50, 150, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+        }
+
+        .navbar a:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 25px #64C8FF99,
+            0 0 50px #B4FFE659, inset 0 2px 4px #fff;
         }
 
         .content-m {
             border-radius: 1rem;
-            background-color: #707376ba;
-            color: #ffffff;
-            flex: 1;
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
             text-align: left;
-            padding: 1rem;
+            padding: 2rem;
         }
 
         @media (max-width: 600px) {
-            .main-c {
+            .head-c {
                 flex-direction: column;
                 height: auto;
                 min-height: 100vh;
+            }
+
+            .navbar {
+                flex-direction: column;
             }
 
             .side-img {
@@ -107,15 +152,15 @@
 </head>
 <body>
 
-<div class="main-c">
-    <div class="side-img"></div>
-    <div class="right-column">
-        <nav class="navbar">
+<div class="head-c">
+    <div class="side-img boxsh"></div>
+    <div class="main-c">
+        <nav class="navbar boxsh">
             <a href="#">Index</a>
             <a href="#">Projects</a>
-            <a href="#">Webring</a>
+            <a href="#">The Vulpes Neighborhood</a>
         </nav>
-        <main class="content-m">
+        <main class="content-m boxsh">
             <div>
                 <h1>Hello i am Taruu!</h1>
                 <div>
