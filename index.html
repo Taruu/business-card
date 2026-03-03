@@ -1,48 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="/assets/icons/favicon-96x96.png" rel="icon" sizes="96x96" type="image/png"/>
-    <link href="/assets/icons/favicon.svg" rel="icon" type="image/svg+xml"/>
-    <link href="/assets/icons/favicon.ico" rel="shortcut icon"/>
-    <link href="/assets/icons/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-    <link href="/assets/icons/site.webmanifest" rel="manifest"/>
-    <meta content="Taruu" name="apple-mobile-web-app-title"/>
-    <meta content="Personal website of Taruu. Find my contacts, projects, and links to my social profiles like Discord, GitHub, and more."
-          name="description">
-    <meta content="Taruu, personal website, GitHub, VRchat, Telegram, projects, programming" name="keywords">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Taruu" name="author">
-    <meta content="index, follow" name="robots">
-    <meta content="index, follow" name="googlebot">
-    <meta content="English" name="language">
-    <meta content="light" name="color-scheme">
-    <meta content="#ff7d3f" name="theme-color">
-    <meta content="Taruu's Personal Website" property="og:title">
-    <meta content="Explore my projects, contacts, and social media links." property="og:description">
-    <meta content="https://taruu.ru/assets/images/taruu.png" property="og:image">
-    <meta content="https://taruu.ru" property="og:url">
-    <meta content="summary_large_image" name="twitter:card">
-    <meta content="Taruu's Personal Website" name="twitter:title">
-    <meta content="Explore my projects, contacts, and social media links." name="twitter:description">
-    <meta content="https://taruu.ru/assets/images/taruu.png" name="twitter:image">
-    <link href="assets/styles/index.css" rel="stylesheet">
-    <link href="assets/styles/fonts.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Martel:wght@300;700&display=swap" rel="stylesheet">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taruu site</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: #0a4a6e url(frutiger_aero.webp) no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(1ex);
+            text-shadow: 5px 5px 5px #003C7899, 0 0 1rem #96E6FF66, #57575794 1px 1px 0;
+            text-decoration-color: #003d70;
+
+            font-size: 120%;
+        }
+
+        .head-c {
+            display: flex;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .boxsh {
+            box-shadow: 0 6px 24px #32B4FF59, 0 0 40px #64FFC81A, inset 0 2px 3px #FFFFFFD9;
+            background: linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        .side-img {
+            width: 30vw;
+            background: url(logo.svg) center/75% no-repeat, linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            border: 2px solid #FFFFFF99;
+            border-radius: 1rem;
+
+            position: relative;
+            overflow: hidden
+        }
+
+        .main-c {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .navbar {
+            border: 2px solid #FFFFFFA6;
+            border-radius: 14px;
+            padding: 10px;
+            display: flex;
+            gap: 6px;
+            position: relative;
+            overflow: clip;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .navbar a {
+
+            flex: 1 1 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            white-space: normal;
+            word-wrap: break-word;
+
+
+            position: relative;
+            background: linear-gradient(
+                    135deg,
+                    #FFFFFFCC 0%,
+                    #DCF8FF99 50%,
+                    #B4F0FFB2 100%
+            );
+            border: 2px solid #FFFFFFCC;
+            border-radius: 1rem;
+            padding: 1vw;
+            font-size: 2ex;
+            color: #003d70;
+
+            font-weight: 700;
+
+
+            box-shadow: 0 4px 15px #50B4FF66,
+            0 0 30px #96FFDC33,
+            inset 0 2px 4px white,
+            inset 0 -2px 4px #3296FF33;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+
+        }
+
+        .navbar a:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 25px #64C8FF99,
+            0 0 50px #B4FFE659, inset 0 2px 4px #fff;
+        }
+
+        .content-m {
+            border-radius: 1rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            padding: 2rem;
+        }
+
+        @media (max-width: 600px) {
+            .head-c {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .side-img {
+                width: 100%;
+                height: 15vh;
+            }
+
+            .content-m {
+                min-height: 300px;
+            }
+        }
+
+        .aero-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -999;
+            pointer-events: none;
+            overflow: hidden;
+            contain: strict;
+        }
+
+        .aero-bg i {
+            position: absolute;
+            bottom: -150px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: radial-gradient(circle at 70% 70%, #00CCFF66 0, transparent 60%);
+            filter: drop-shadow(0 0 8px #00CCFF66);
+            animation: up linear infinite;
+        }
+
+        /* The 'shine' on the bubble */
+        .aero-bg i::after {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 15%;
+            width: 70%;
+            height: 40%;
+            border-radius: 50%;
+            background: linear-gradient(#FFFFFF7F, transparent);
+
+        }
+
+        @keyframes up {
+            0% {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate3d(0, -120vh, 0);;
+                opacity: 0;
+            }
+        }
+    </style>
+    <script>
+        const f = Math.floor;
+        const mr = Math.random;
+        let s, d, h, m, sc, y, c;
+        setInterval(() => {
+            s = f((new Date() - new Date(1031515200000)) / 1000);
+            d = f(s / 86400);
+            h = f((s % 86400) / 3600);
+            m = f((s % 3600) / 60);
+            sc = s % 60;
+            y = f(d / 365.25);
+            document.getElementById('my-uptime').innerText =
+                `My uptime:\t${d}d, ${h}h, ${m}m, ${sc}s (${y}y ♍)`;
+        }, 1000);
+        document.addEventListener("DOMContentLoaded", () => {
+            h="";
+            for (let i = 0; i < 30 - (navigator.maxTouchPoints > 0 ? 23 : 0); i++) {
+                c = Math.random() * 100 + 60;
+                h += `<i style="left:${mr() * 100}%;width:${c}px;height:${c}px;animation-duration:${mr() * 10 + 5}s;animation-delay:${mr() * 8 + 1}s"></i>`;
+            }
+            document.body.insertAdjacentHTML('beforeend', `<div class="aero-bg">${h}</div>`);
+        });
+
+    </script>
 </head>
 <body>
-<header>
-    <h1>Taruu</h1>
-</header>
-<main>
-    <section class="my_contacts">
-        <div class="info_tables">
-            <h2>My contacts</h2>
-            <article>
-                <div class="profile">
-                    <img alt="Taruu avatar" src="/assets/images/taruu.png">
+
+<div class="head-c">
+    <div class="side-img boxsh"></div>
+    <div class="main-c">
+        <nav class="navbar boxsh">
+            <a href="/">Index</a>
+            <a href="/projects.html">Projects</a>
+            <a href="/nethood.html">The Vulpes Neighborhood</a>
+        </nav>
+        <main class="content-m boxsh">
+            <div>
+                <h1>Hello i am Taruu!</h1>
+                <div>
                     <table>
+                        <caption>My Contacts:</caption>
+                        <tbody>
+                        <tr>
+                            <td>Telegram</td>
+                            <td>
+                                <a href="https://t.me/taruu_max" rel="noopener noreferrer" target="_blank">
+                                    @taruu_max
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Blog (tg)</td>
+                            <td>
+                                <a href="https://t.me/s/tailed_dev" rel="noopener noreferrer" target="_blank">
+                                    @tailed_dev
+                                </a>
+                            </td>
+                        </tr>
                         <tr>
                             <td>Discord</td>
                             <td><a href="https://discordapp.com/users/489145337701859328" rel="noopener noreferrer"
@@ -54,142 +249,41 @@
                         <tr>
                             <td>GitHub</td>
                             <td>
-                                <a href="https://github.com/Taruu" rel="noopener noreferrer" target="_blank"
-                                   title="Visit my GitHub profile">
-                                    Taruu
-                                </a>
+                                <a href="https://github.com/Taruu" rel="noopener noreferrer" target="_blank">Taruu</a>
                             </td>
                         </tr>
                         <tr>
                             <td>VRChat</td>
                             <td>
                                 <a href="https://vrchat.com/home/user/usr_95cbe9a9-f928-4807-8a26-6fffa042ef3b"
-                                   rel="noopener noreferrer"
-                                   target="_blank" title="Visit my VRChat profile">
-                                    Taruu
-                                </a>
+                                   rel="noopener noreferrer">Taruu</a>
                             </td>
                         </tr>
                         <tr>
-                            <td>Telegram</td>
+                            <td>Matrix</td>
                             <td>
-                                <a href="https://t.me/taruu_max" rel="noopener noreferrer" target="_blank"
-                                   title="Visit my Telegram profile">
-                                    @taruu_max
-                                </a>
+                                ...
                             </td>
                         </tr>
-                        <tr>
-                            <td>Blog</td>
-                            <td>
-                                <a href="https://t.me/s/tailed_dev" rel="noopener noreferrer" target="_blank"
-                                   title="Visit my Telegram blog channel">
-                                    @tailed_dev
-                                </a>
-                            </td>
-                        </tr>
-
+                        </tbody>
                     </table>
                 </div>
-            </article>
-        </div>
-    </section>
-    <section class="my_projects">
-        <div class="info_tables">
-            <h2>My projects</h2>
-            <article>
-                <table>
-                    <tr>
-                        <td><a href="https://thisfoxgirldoesnotexist.com/" rel="noopener noreferrer" target="_blank"
-                               title="Foxes!">thisfoxgirldoesnotexist.com</a>
-                        </td>
-                        <td>
-                            <p>This foxgirl does not exist. Foxgirl analog
-                                "This Person Does Not Exist"
-                            </p>
-                        </td>
+                <div>
+                    <h4>Some facts:</h4>
+                    <ul>
+                        <li id="my-uptime"></li>
+                        <li>I like fox girls</li>
+                        <li style="color: orange">I like orange</li>
+                        <li><a target="_blank" href="https://radio.taruu.ru">Check my radio</a></li>
+                        <li>Size of this page less 13kb</li>
+                    </ul>
+                </div>
+            </div>
 
-                    </tr>
-                    <tr>
-                        <td><a href="https://t.me/pixelizationaibot" rel="noopener noreferrer" target="_blank"
-                               title="Foxes!">Pixelization Bot</a>
-                        </td>
-                        <td>
-                            <p>Pixelization Bot, use AI for convert any image into pixel art like
-                            </p>
-                        </td>
+        </main>
 
-                    </tr>
-                    <tr>
-                        <td><a href="https://github.com/Taruu/mailproxy-with-utils" rel="noopener noreferrer"
-                               target="_blank">mailproxy</a></td>
-                        <td>
-                            <p>
-                                simple mail proxy for old programs.
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://taruu.github.io/xxhash_fast_hash_big_files/" rel="noopener noreferrer"
-                               target="_blank">
-                                xxhash browser demo
-                            </a>
-                        </td>
-                        <td>
-                            <p>
-                                demo for fastest file hash calculation in browser
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="https://radio.taruu.ru">radio.taruu.ru</a>
-                        </td>
-                        <td>
-                            <p>
-                                my music
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="https://t.me/s/fox_folder" rel="noopener noreferrer">
-                                        @fox_folder
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://t.me/s/cat_folder" rel="noopener noreferrer">
-                                        @cat_folder
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://t.me/s/robot_folder" rel="noopener noreferrer">
-                                        @robot_folder
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://t.me/s/ai_folder" rel="noopener noreferrer">
-                                        @ai_folder
-                                    </a>
-                                </li>
-                            </ul>
-                        </td>
-                        <td>
-                            <p>cute images</p>
-                        </td>
-                    </tr>
-                </table>
-            </article>
-        </div>
+    </div>
 
-    </section>
-
-</main>
-<footer>
-    <a href="https://www.youtube.com/watch?v=jofNR_WkoCE" rel="noopener noreferrer">What Does The Fox Say?</a>
-</footer>
+</div>
 </body>
 </html>

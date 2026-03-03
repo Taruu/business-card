@@ -2,9 +2,434 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taruu projects</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background: #0a4a6e url(frutiger_aero.webp) no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(1ex);
+            text-shadow: 5px 5px 5px #003C7899, 0 0 1rem #96E6FF66, #57575794 1px 1px 0;
+            text-decoration-color: #003d70;
+
+            font-size: 120%;
+        }
+
+        .head-c {
+            display: flex;
+            height: 100vh;
+            box-sizing: border-box;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .boxsh {
+            box-shadow: 0 6px 24px #32B4FF59, 0 0 40px #64FFC81A, inset 0 2px 3px #FFFFFFD9;
+            background: linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        .side-img {
+            width: 30vw;
+            background: url(logo.svg) center/75% no-repeat, linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            border: 2px solid #FFFFFF99;
+            border-radius: 1rem;
+
+            position: relative;
+            overflow: hidden
+        }
+
+        .main-c {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .navbar {
+            border: 2px solid #FFFFFFA6;
+            border-radius: 14px;
+            padding: 10px;
+            display: flex;
+            gap: 6px;
+            position: relative;
+            overflow: clip;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .navbar a {
+
+            flex: 1 1 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            white-space: normal;
+            word-wrap: break-word;
+
+
+            position: relative;
+            background: linear-gradient(
+                    135deg,
+                    #FFFFFFCC 0%,
+                    #DCF8FF99 50%,
+                    #B4F0FFB2 100%
+            );
+            border: 2px solid #FFFFFFCC;
+            border-radius: 1rem;
+            padding: 1vw;
+            font-size: 2ex;
+            color: #003d70;
+
+            font-weight: 700;
+
+
+            box-shadow: 0 4px 15px #50B4FF66,
+            0 0 30px #96FFDC33,
+            inset 0 2px 4px white,
+            inset 0 -2px 4px #3296FF33;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+
+        }
+
+        .navbar a:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 25px #64C8FF99,
+            0 0 50px #B4FFE659, inset 0 2px 4px #fff;
+        }
+
+        .content-m {
+            border-radius: 1rem;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            text-align: left;
+            padding: 2rem;
+        }
+
+        @media (max-width: 1000px) {
+            .head-c {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+
+            .side-img {
+                width: 100%;
+                height: 15vh;
+            }
+
+            .content-m {
+                min-height: 300px;
+                padding: 0;
+            }
+
+
+
+            tr {
+                display: grid;
+            }
+        }
+
+        .aero-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -999;
+            pointer-events: none;
+            overflow: hidden;
+            contain: strict;
+        }
+
+        .aero-bg i {
+            position: absolute;
+            bottom: -150px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: radial-gradient(circle at 70% 70%, #00CCFF66 0, transparent 60%);
+            filter: drop-shadow(0 0 8px #00CCFF66);
+            animation: up linear infinite;
+        }
+
+        /* The 'shine' on the bubble */
+        .aero-bg i::after {
+            content: '';
+            position: absolute;
+            top: 5%;
+            left: 15%;
+            width: 70%;
+            height: 40%;
+            border-radius: 50%;
+            background: linear-gradient(#FFFFFF7F, transparent);
+
+        }
+
+        @keyframes up {
+            0% {
+                transform: translate3d(0, 0, 0);
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate3d(0, -120vh, 0);;
+                opacity: 0;
+            }
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px rgba(0, 60, 120, 0.2),
+            inset 0 0 15px rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            color: #003d70;
+
+
+        }
+
+        caption {
+            text-align: left;
+            font-weight: bold;
+            font-size: 1.4rem;
+            padding: 10px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 10px rgba(150, 230, 255, 0.5);
+            color: #004a80;
+        }
+
+        /* Header/Top Row effect */
+        thead tr, tr:first-child {
+            background: linear-gradient(
+                    to bottom,
+                    rgba(255, 255, 255, 0.8) 0%,
+                    rgba(220, 248, 255, 0.5) 45%,
+                    rgba(180, 240, 255, 0.5) 50%,
+                    rgba(150, 220, 255, 0.6) 100%
+            );
+            font-weight: 700;
+        }
+
+
+        /* Cells */
+        td, th {
+            padding: 1vh 0.3vw;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        td:last-child {
+            border-right: none;
+        }
+
+        /* Zebra Striping with Aero Glow */
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        tr:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hover effect for rows */
+        tr:hover {
+            background: linear-gradient(
+                    to bottom,
+                    rgba(100, 200, 255, 0.4),
+                    rgba(100, 200, 255, 0.2)
+            );
+            cursor: default;
+        }
+
+        /* Style the links inside the table to look like glossy buttons or clean text */
+        table a {
+            color: #0056b3;
+
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        table a:hover {
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            color: #008cff;
+        }
+
+        /* Rounded corners for the very first and last cells */
+        tr:first-child td:first-child {
+            border-top-left-radius: 10px;
+        }
+
+        tr:first-child td:last-child {
+            border-top-right-radius: 10px;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 10px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 10px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+    <script>
+        const f = Math.floor;
+        const mr = Math.random;
+        let s, d, h, m, sc, y, c;
+        document.addEventListener("DOMContentLoaded", () => {
+            h = "";
+            for (let i = 0; i < 30 - (navigator.maxTouchPoints > 0 ? 23 : 0); i++) {
+                c = Math.random() * 100 + 60;
+                h += `<i style="left:${mr() * 100}%;width:${c}px;height:${c}px;animation-duration:${mr() * 10 + 5}s;animation-delay:${mr() * 8 + 1}s"></i>`;
+            }
+            document.body.insertAdjacentHTML('beforeend', `<div class="aero-bg">${h}</div>`);
+        });
+    </script>
 </head>
 <body>
 
+<div class="head-c">
+    <div class="side-img boxsh"></div>
+    <div class="main-c">
+        <nav class="navbar boxsh">
+            <a href="/">Index</a>
+            <a href="/projects.html">Projects</a>
+            <a href="/nethood.html">The Vulpes Neighborhood</a>
+        </nav>
+        <main class="content-m boxsh">
+            <div>
+                <h1>My projects</h1>
+                <div>
+                    <table>
+                        <caption>Software:</caption>
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>
+                                Links
+                            </td>
+                            <td>Desc</td>
+                        </tr>
+                        <tr>
+                            <td>This fox girl does not exist</td>
+                            <td><a href="https://thisfoxgirldoesnotexist.com/" rel="noopener noreferrer"
+                                   target="_blank">thisfoxgirldoesnotexist.com</a>
+                            </td>
+                            <td>This foxgirl does not exist. Foxgirl analog "This Person Does Not Exist"</td>
+                        </tr>
+
+                        <tr>
+                            <td>Pixelization Bot</td>
+                            <td>
+                                <a href=https://t.me/pixelizationaibot" rel="noopener noreferrer" target="_blank">
+                                    Pixelization Bot
+                                </a>(tg)<br>
+                                <a href=https://github.com/make-and-think/PixelizationBot" rel="noopener noreferrer"
+                                   target="_blank">
+                                    PixelizationBot
+                                </a>(github)
+
+                            </td>
+                            <td>Pixelization Bot, use AI for convert any image into pixel art like</td>
+                        </tr>
+
+                        <tr>
+                            <td>mailproxy</td>
+                            <td>
+                                <a href="https://github.com/Taruu/mailproxy-with-extra" rel="noopener noreferrer"
+                                   target="_blank">
+                                    mailproxy-with-extra
+                                </a>
+                            </td>
+                            <td>simple mail proxy for old programs.</td>
+                        </tr>
+                        <tr>
+                            <td>xxhash browser demo</td>
+                            <td>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+
+                                </a>
+                            </td>
+                            <td>demo for fastest file hash calculation in browser</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+
+                                </a>
+                            </td>
+                            <td></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
 </body>
 </html>
