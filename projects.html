@@ -8,18 +8,18 @@
         body {
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
-            background: #0a4a6e url(frutiger_aero.webp) no-repeat;
+            background: #0a4a6e url(frutiger_aero.webp) no-repeat space;
             background-size: cover;
             backdrop-filter: blur(1ex);
             text-shadow: 5px 5px 5px #003C7899, 0 0 1rem #96E6FF66, #57575794 1px 1px 0;
             text-decoration-color: #003d70;
-
             font-size: 120%;
+
         }
 
-        .head-c {
+        .c-h {
             display: flex;
-            height: 100vh;
+            height: 100%;
             box-sizing: border-box;
             padding: 1rem;
             gap: 1rem;
@@ -31,9 +31,9 @@
             backdrop-filter: blur(20px) saturate(180%);
         }
 
-        .side-img {
+        .s-img {
             width: 30vw;
-            background: url(logo.svg) center/75% no-repeat, linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            background: url("assets/images/taruu_back.webp") left/100% no-repeat, linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
             border: 2px solid #FFFFFF99;
             border-radius: 1rem;
 
@@ -41,7 +41,7 @@
             overflow: hidden
         }
 
-        .main-c {
+        .c-v {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -113,7 +113,7 @@
         }
 
         @media (max-width: 1000px) {
-            .head-c {
+            .c-h {
                 flex-direction: column;
                 height: auto;
                 min-height: 100vh;
@@ -123,7 +123,7 @@
                 flex-direction: column;
             }
 
-            .side-img {
+            .s-img {
                 width: 100%;
                 height: 15vh;
             }
@@ -132,7 +132,6 @@
                 min-height: 300px;
                 padding: 0;
             }
-
 
 
             tr {
@@ -214,18 +213,6 @@
             color: #004a80;
         }
 
-        /* Header/Top Row effect */
-        thead tr, tr:first-child {
-            background: linear-gradient(
-                    to bottom,
-                    rgba(255, 255, 255, 0.8) 0%,
-                    rgba(220, 248, 255, 0.5) 45%,
-                    rgba(180, 240, 255, 0.5) 50%,
-                    rgba(150, 220, 255, 0.6) 100%
-            );
-            font-weight: 700;
-        }
-
 
         /* Cells */
         td, th {
@@ -261,7 +248,6 @@
         /* Style the links inside the table to look like glossy buttons or clean text */
         table a {
             color: #0056b3;
-
             font-weight: 600;
             padding: 2px 8px;
             border-radius: 4px;
@@ -327,13 +313,6 @@
                         <caption>Software:</caption>
                         <tbody>
                         <tr>
-                            <td>Name</td>
-                            <td>
-                                Links
-                            </td>
-                            <td>Desc</td>
-                        </tr>
-                        <tr>
                             <td>This fox girl does not exist</td>
                             <td><a href="https://thisfoxgirldoesnotexist.com/" rel="noopener noreferrer"
                                    target="_blank">thisfoxgirldoesnotexist.com</a>
@@ -369,58 +348,105 @@
                         <tr>
                             <td>xxhash browser demo</td>
                             <td>
-                                <a href="" rel="noopener noreferrer" target="_blank">
-
+                                <a href="https://taruu.github.io/xxhash_fast_hash_big_files/" rel="noopener noreferrer"
+                                   target="_blank">
+                                    xxhash_fast_hash_big_files
                                 </a>
                             </td>
                             <td>demo for fastest file hash calculation in browser</td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <a href="" rel="noopener noreferrer" target="_blank">
+                        </tbody>
+                    </table>
 
-                                </a>
+                    <table>
+                        <caption>Cites:</caption>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://chrono-edge.taruu.ru/index.php/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+                                   rel="noopener noreferrer"
+                                   target="_blank">Chrono Edge</a>
                             </td>
-                            <td></td>
+                            <td>Wiki of frozen RP project</td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td>
-                                <a href="" rel="noopener noreferrer" target="_blank">
-
-                                </a>
+                                <a href="https://nradiowave.taruu.ru/index.php/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+                                   rel="noopener noreferrer"
+                                   target="_blank">Nradiowave Wiki</a>
                             </td>
-                            <td></td>
+                            <td>Fan Wiki of nradiowave</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td>
-                                <a href="" rel="noopener noreferrer" target="_blank">
-
-                                </a>
+                            <td><a href="   " rel="noopener noreferrer"
+                                   target="_blank">Text RP</a>
                             </td>
-                            <td></td>
+                            <td>Currently inprogress</td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+
+                    <table>
+                        <caption>Cute images</caption>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="https://t.me/fox_folder">@fox_folder</a>
+                            </td>
+                            <td>Collection of cute fox girl images</td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td>
-                                <a href="" rel="noopener noreferrer" target="_blank">
-
-                                </a>
+                                <a href="https://t.me/robot_folder">@robot_folder</a>
                             </td>
-                            <td></td>
+                            <td>Collection of cute robot images</td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td>
-                                <a href="" rel="noopener noreferrer" target="_blank">
-
-                                </a>
+                                <a href="https://t.me/cat_folder">@cat_folder</a>
                             </td>
-                            <td></td>
+                            <td>Collection of cute cat images</td>
                         </tr>
-
+                        <tr>
+                            <td><a href="https://t.me/rabbit_folder">@rabbit_folder</a></td>
+                            <td>Collection of cute rabbit images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/mouse_folder">@mouse_folder</a></td>
+                            <td>Collection of cute mouse images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/snake_folder">@snake_folder</a></td>
+                            <td>Collection of cute snake images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/dragon_folder">@dragon_folder</a></td>
+                            <td>Collection of cute dragon images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/spider_folder">@spider_folder</a></td>
+                            <td>Collection of cute spider images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/bird_folder">@bird_folder</a></td>
+                            <td>Collection of cute bird images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/dog_folder">@dog_folder</a></td>
+                            <td>Collection of cute dog images</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://t.me/wolf_folder">@wolf_folder</a></td>
+                            <td>Collection of cute wolf images</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="https://t.me/ai_folder">@ai_folder</a>
+                            </td>
+                            <td>Collection of personal ai arts images</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
