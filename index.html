@@ -171,8 +171,6 @@
             pointer-events: none;
             overflow: hidden;
             contain: strict;
-            will-change: transform;
-            transform: translateZ(0);
         }
 
         .aero-bg i {
@@ -183,7 +181,9 @@
             background: radial-gradient(circle at 70% 70%, var(--bc) 0, transparent 60%);
             filter: drop-shadow(0 0 8px var(--bc));
             animation: up linear infinite;
+            will-change: auto;
         }
+
         .aero-bg i::after {
             content: '';
             position: absolute;
@@ -226,10 +226,11 @@
         }, 1000);
         document.addEventListener("DOMContentLoaded", () => {
             h = "";
-            for (let i = 0; i < 5 - (navigator.maxTouchPoints > 0 ? 3 : 0); i++) {
+            for (let i = 0; i < 15 - (navigator.maxTouchPoints > 0 ? 10 : 0); i++) {
                 c = Math.random() * 100 + 60;
-                h += `<i style="left:${mr() * 100}%;width:${c}px;height:${c}px;animation-duration:${mr() * 10 + 5}s;animation-delay:${mr() * 8 + 1}s"></i>`;
+                h += `<i style="left:${p(mr() * 100)}%;width:${p(c)}px;height:${p(c)}px;animation-duration:${p(mr() * 10 + 5)}s;animation-delay:${p(mr() * 8 + 1)}s"></i>`;
             }
+
             document.body.insertAdjacentHTML('beforeend', `<div class="aero-bg">${h}</div>`);
         });
 
@@ -314,5 +315,6 @@
         </main>
     </div>
 </div>
+<video id="bgb"></video>
 </body>
 </html>

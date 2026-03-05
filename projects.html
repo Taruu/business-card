@@ -172,7 +172,6 @@
                 display: grid;
             }
         }
-
         .aero-bg {
             position: fixed;
             inset: 0;
@@ -180,8 +179,6 @@
             pointer-events: none;
             overflow: hidden;
             contain: strict;
-            will-change: transform;
-            transform: translateZ(0);
         }
 
         .aero-bg i {
@@ -192,6 +189,7 @@
             background: radial-gradient(circle at 70% 70%, var(--bc) 0, transparent 60%);
             filter: drop-shadow(0 0 8px var(--bc));
             animation: up linear infinite;
+            will-change: auto;
         }
 
         .aero-bg i::after {
@@ -321,7 +319,7 @@
         let s, d, h, m, sc, y, c;
         document.addEventListener("DOMContentLoaded", () => {
             h = "";
-            for (let i = 0; i < 5 - (navigator.maxTouchPoints > 0 ? 3 : 0); i++) {
+            for (let i = 0; i < 15 - (navigator.maxTouchPoints > 0 ? 10 : 0); i++) {
                 c = Math.random() * 100 + 60;
                 h += `<i style="left:${mr() * 100}%;width:${c}px;height:${c}px;animation-duration:${mr() * 10 + 5}s;animation-delay:${mr() * 8 + 1}s"></i>`;
             }
