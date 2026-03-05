@@ -5,14 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taruu site</title>
     <style>
+        :root {
+            /* Base Colors */
+            --bg-b: #0a4a6e;
+            --text-blue: #003d70;
+
+            /* Translucent Whites (Glass Edges & Highlights) */
+            --w-85: #ffffffd9;
+            --w-80: #ffffffcc;
+            --w-60: #ffffff99; /* Merged #FFFFFF99 and #FFFFFFA6 */
+            --w-50: #ffffff80; /* Merged #FFFFFF80 and #FFFFFF7F */
+            --w-40: #ffffff66; /* Converted rgba(255, 255, 255, 0.4) */
+
+            /* Glassmorphism Gradients */
+            --gbl: #b4f0ff59;
+            --gbm: #b4f0ffb2;
+            --gbd: #78dcff66;
+            --gcl: #dcf8ff99;
+
+            /* Text Shadows & Glows */
+            --sbd: #003d7099; /* Merged #003C7899 to match --text-blue */
+            --sg: #57575794;
+            --gc: #96e6ff66;
+            --bc: #00ccff66;
+
+            /* Blue Box Shadows */
+            --sb-20: #3296ff33;
+            --sb-40: #32b4ff59; /* Consolidated #32B4FF59 and #50B4FF66 */
+            --sb-60: #32b4ff99; /* Consolidated #64C8FF99 */
+
+            /* Mint/Cyan Box Shadow Glows */
+            --gm-10: #64ffc81a;
+            --gm-20: #64ffc833; /* Consolidated #96FFDC33 */
+            --gm-40: #64ffc866; /* Consolidated #B4FFE659 */
+        }
+
         body {
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
-            background: #0a4a6e url(frutiger_aero.webp) no-repeat;
+            background: var(--bg-b) url(fa.webp) no-repeat;
             background-size: cover;
             backdrop-filter: blur(1ex);
-            text-shadow: 5px 5px 5px #003C7899, 0 0 1rem #96E6FF66, #57575794 1px 1px 0;
-            text-decoration-color: #003d70;
+            text-shadow: 5px 5px 5px var(--sbd), 0 0 1rem var(--gc), var(--sg) 1px 1px 0;
+            text-decoration-color: var(--text-blue);
 
             font-size: 120%;
             min-height: 100vh;
@@ -33,28 +68,25 @@
         }
 
         .boxsh {
-            box-shadow: 0 6px 24px #32B4FF59, 0 0 40px #64FFC81A, inset 0 2px 3px #FFFFFFD9;
-            background: linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
+            box-shadow: 0 6px 24px var(--sb-40), 0 0 40px var(--gm-10), inset 0 2px 3px var(--w-85);
+            background: linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
             backdrop-filter: blur(20px) saturate(180%);
         }
 
         .s-img {
-            /*width: 30vw;*/
-            background: url(logo.svg) center/75% no-repeat, linear-gradient(180deg, #FFFFFF80 0%, #B4F0FF59 50%, #78DCFF66 100%);
-            border: 2px solid #FFFFFF99;
+            background: url(logo.svg) center/75% no-repeat, linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
+            border: 2px solid var(--w-60);
             min-width: 20vw;
             min-height: 50vh;
-            border-radius: 1rem;;
+            border-radius: 1rem;
             height: fit-content;
             position: relative;
             overflow: hidden;
             padding: 1rem;
         }
 
-
-
         .navbar {
-            border: 2px solid #FFFFFFA6;
+            border: 2px solid var(--w-60);
             border-radius: 14px;
             padding: 10px;
             display: flex;
@@ -66,47 +98,39 @@
         }
 
         .navbar a {
-
             flex: 1 1 45px;
-
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-
             white-space: normal;
             word-wrap: break-word;
-
-
             position: relative;
             background: linear-gradient(
                     135deg,
-                    #FFFFFFCC 0%,
-                    #DCF8FF99 50%,
-                    #B4F0FFB2 100%
+                    var(--w-80) 0%,
+                    var(--gcl) 50%,
+                    var(--gbm) 100%
             );
-            border: 2px solid #FFFFFFCC;
+            border: 2px solid var(--w-80);
             border-radius: 1rem;
             padding: 1vw;
             font-size: 2ex;
-            color: #003d70;
-
+            color: var(--text-blue);
             font-weight: 700;
-
-
-            box-shadow: 0 4px 15px #50B4FF66,
-            0 0 30px #96FFDC33,
+            box-shadow: 0 4px 15px var(--sb-40),
+            0 0 30px var(--gm-20),
             inset 0 2px 4px white,
-            inset 0 -2px 4px #3296FF33;
+            inset 0 -2px 4px var(--sb-20);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
-
         }
 
         .navbar a:hover {
             transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 25px #64C8FF99,
-            0 0 50px #B4FFE659, inset 0 2px 4px #fff;
+            box-shadow: 0 8px 25px var(--sb-60),
+            0 0 50px var(--gm-40),
+            inset 0 2px 4px white;
         }
 
         .content-m {
@@ -151,13 +175,11 @@
             position: absolute;
             bottom: -150px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            background: radial-gradient(circle at 70% 70%, #00CCFF66 0, transparent 60%);
-            filter: drop-shadow(0 0 8px #00CCFF66);
+            border: 1px solid var(--w-40);
+            background: radial-gradient(circle at 70% 70%, var(--bc) 0, transparent 60%);
+            filter: drop-shadow(0 0 8px var(--bc));
             animation: up linear infinite;
         }
-
-        /* The 'shine' on the bubble */
         .aero-bg i::after {
             content: '';
             position: absolute;
@@ -166,8 +188,7 @@
             width: 70%;
             height: 40%;
             border-radius: 50%;
-            background: linear-gradient(#FFFFFF7F, transparent);
-
+            background: linear-gradient(var(--w-50), transparent);
         }
 
         @keyframes up {
@@ -179,15 +200,16 @@
                 opacity: 0.8;
             }
             100% {
-                transform: translate3d(0, -120vh, 0);;
+                transform: translate3d(0, -120vh, 0);
                 opacity: 0;
             }
         }
     </style>
     <script>
-        const f = Math.floor;
-        const mr = Math.random;
-        let s, d, h, m, sc, y, c;
+        let s, d, h, m, sc, y, c, p, mr, f;
+        p = (num) => num.toString().padStart(2, '0');
+        f = Math.floor;
+        mr = Math.random;
         setInterval(() => {
             s = f((new Date() - new Date(1031515200000)) / 1000);
             d = f(s / 86400);
@@ -196,10 +218,10 @@
             sc = s % 60;
             y = f(d / 365.25);
             document.getElementById('my-uptime').innerText =
-                `My uptime:\t${d}d, ${h}h, ${m}m, ${sc}s (${y}y ♍)`;
+                `My uptime:\t${d}d, ${p(h)}h, ${p(m)}m, ${p(sc)}s (${y}y ♍)`;
         }, 1000);
         document.addEventListener("DOMContentLoaded", () => {
-            h="";
+            h = "";
             for (let i = 0; i < 30 - (navigator.maxTouchPoints > 0 ? 23 : 0); i++) {
                 c = Math.random() * 100 + 60;
                 h += `<i style="left:${mr() * 100}%;width:${c}px;height:${c}px;animation-duration:${mr() * 10 + 5}s;animation-delay:${mr() * 8 + 1}s"></i>`;
