@@ -52,7 +52,7 @@
             overflow-x: hidden;
         }
 
-        /* Hardware-accelerated background layer to replace the expensive body backdrop-filter */
+        /* Hardware-accelerated background layer */
         body::before {
             content: "";
             position: fixed;
@@ -221,7 +221,38 @@
             }
         }, 1000);
 
-        // Hardware-Accelerated High Frame-Rate Bubbles Engine
+        // Interactive Audio Synthesizer Pop Sound Generator [20]
+        let audioCtx;
+        function playPopSound() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                // Fast pitch frequency ramp simulating a wet pop [20]
+                osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.08);
+
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch (e) {
+                console.warn("Audio Context blocked or unsupported by browser context");
+            }
+        }
+
+        // Hardware-Accelerated Dynamic Bubble and Splat Engine
         addEventListener("DOMContentLoaded", () => {
             const d = document, b = d.body;
             const g = b.appendChild(d.createElement("div"));
@@ -230,8 +261,35 @@
             const x = c.getContext("2d");
 
             let bubbles = [];
-            // Adaptive count helps keep performance smooth on both mobile and desktop
+            let particles = []; // Droplet splash arrays [20]
             const count = navigator.maxTouchPoints ? 8 : 16;
+
+            // Dynamic Splat droplet particle class [20]
+            class PopParticle {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.vx = (Math.random() - 0.5) * 6;
+                    this.vy = (Math.random() - 0.5) * 6 - 2;
+                    this.radius = Math.random() * 3 + 1;
+                    this.alpha = 1;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.vy += 0.15; // Simulated gravity pull [20]
+                    this.alpha -= 0.035; // Fade-out factor [20]
+                }
+                draw() {
+                    x.save();
+                    x.globalAlpha = this.alpha;
+                    x.fillStyle = 'rgba(255, 255, 255, 0.85)';
+                    x.beginPath();
+                    x.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    x.fill();
+                    x.restore();
+                }
+            }
 
             class Bubble {
                 constructor(spawnAtBottom = false) {
@@ -249,7 +307,7 @@
                     this.wobble += this.wobbleSpeed;
                     this.x += Math.sin(this.wobble) * this.wobbleRange;
 
-                    // Reset position when bubble floats out of view
+                    // Reset position when bubble floats out of view [20]
                     if (this.y < -this.r) {
                         this.y = c.height + this.r + Math.random() * 20;
                         this.x = Math.random() * c.width;
@@ -269,7 +327,7 @@
                     x.lineWidth = 1.5;
                     x.stroke();
 
-                    // Radial Gradient Core
+                    // Radial Gradient Core [20]
                     const ox = bx + r * .4, oy = y + r * .4;
                     const rg = x.createRadialGradient(ox, oy, 0, ox, oy, r * 1.2);
                     rg.addColorStop(0, "#0cf6");
@@ -277,11 +335,11 @@
                     x.fillStyle = rg;
                     x.fill();
 
-                    // Remove shadows before drawing the gloss highlight to maximize draw speeds
+                    // Remove shadows before drawing the gloss highlight to maximize rendering speeds
                     x.shadowColor = "transparent";
                     x.shadowBlur = 0;
 
-                    // Specular Linear highlight
+                    // Specular Linear highlight [20]
                     const lg = x.createLinearGradient(bx, y - .9 * r, bx, y - .1 * r);
                     lg.addColorStop(0, "#fff8");
                     lg.addColorStop(1, "#fff0");
@@ -306,12 +364,52 @@
 
             const animate = () => {
                 x.clearRect(0, 0, c.width, c.height);
+
+                // Update and render bubbles [20]
                 for (let i = 0; i < bubbles.length; i++) {
                     bubbles[i].update();
                     bubbles[i].draw();
                 }
+
+                // Update and render splash particles [20]
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.update();
+                    p.draw();
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
+                    }
+                }
+
                 requestAnimationFrame(animate);
             };
+
+            // Hit coordinates matching mechanics [20]
+            const handlePopCheck = (clientX, clientY) => {
+                for (let i = bubbles.length - 1; i >= 0; i--) {
+                    const b = bubbles[i];
+                    const distance = Math.hypot(b.x - clientX, b.y - clientY);
+                    if (distance <= b.r) {
+                        // Generate splashing burst particles [20]
+                        for (let j = 0; j < 8; j++) {
+                            particles.push(new PopParticle(b.x, b.y));
+                        }
+                        playPopSound(); // Play synthesized audio [20]
+                        bubbles[i] = new Bubble(true); // Recycle popped bubble to bottom [20]
+                        break; // Click only bursts one bubble
+                    }
+                }
+            };
+
+            // Capture clicks and touches securely on window viewport context [20]
+            window.addEventListener('mousedown', (e) => {
+                handlePopCheck(e.clientX, e.clientY);
+            });
+            window.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 0) {
+                    handlePopCheck(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
 
             window.addEventListener("resize", resize);
             resize();
