@@ -2,9 +2,382 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taruu - Friends & Badges</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background-color: #0a4a6e;
+            color: #fff;
+            text-decoration-color: #003d70;
+            font-size: 120%;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hardware-accelerated background layer matching the index page */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: #0a4a6e url(fa.webp) no-repeat center/cover;
+            filter: blur(10px);
+            z-index: -1000;
+            transform: scale(1.05); /* Prevents white margins at edge of screen due to blur */
+            pointer-events: none;
+        }
+
+        /* Targeted glowing text aesthetics */
+        .m, .n a, h1, h2, h4, caption, td, li, .badge-name {
+            text-shadow: 3px 3px 6px #003d7099, 0 0 10px #96e6ff66, #57575794 1px 1px 0;
+        }
+
+        .h {
+            display: flex;
+            box-sizing: border-box;
+            padding: 1rem;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .v {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .s {
+            box-shadow: 0 6px 24px #32b4ff59, 0 0 40px #64ffc81a, inset 0 2px 3px #ffffffd9;
+            background: linear-gradient(180deg, #fff8 0%, #b4f0ff59 50%, #78dcff66 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        /* Unified image block for the sidebar */
+        .i {
+            border: 2px solid #fff9;
+            min-width: 15vw;
+            max-width: 25vw;
+            border-radius: 1rem;
+            height: fit-content;
+            position: relative;
+            overflow: hidden;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, #fff8 0%, #b4f0ff59 50%, #78dcff66 100%);
+        }
+
+        .i img {
+            width: 100%;
+            max-width: 75%;
+            height: auto;
+            display: block;
+            border-radius: 0.5rem;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+        }
+
+        /* Uptime style container in sidebar */
+        #u {
+            font-size: 0.75rem;
+            margin-top: 1rem;
+            text-align: center;
+            color: #dcf8ff;
+            text-shadow: 0 2px 4px #003d70;
+            white-space: pre-line;
+        }
+
+        .n {
+            border: 2px solid #fff9;
+            border-radius: 14px;
+            padding: 10px;
+            display: flex;
+            gap: 6px;
+            position: relative;
+            overflow: clip;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .n a {
+            flex: 1 1 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            white-space: normal;
+            word-wrap: break-word;
+            position: relative;
+            background: linear-gradient(135deg, #fffc 0%, #dcf8ff99 50%, #b4f0ffb2 100%);
+            border: 2px solid #fffc;
+            border-radius: 1rem;
+            padding: 1vw;
+            font-size: 2ex;
+            color: #003d70;
+            font-weight: 700;
+            box-shadow: 0 4px 15px #32b4ff59, 0 0 30px #64ffc833, inset 0 2px 4px #fff, inset 0 -2px 4px #3296ff33;
+            transition: all .4s cubic-bezier(.16, 1, .3, 1);
+            overflow: hidden;
+        }
+
+        .n a:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 8px 25px #32b4ff99, 0 0 50px #64ffc866, inset 0 2px 4px #fff;
+        }
+
+        .m {
+            border-radius: 1rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
+            padding: 2rem;
+            width: fit-content;
+        }
+
+        /* 88x31 Button Showcase Grid */
+        .badge-section {
+            margin-bottom: 2.5rem;
+            width: 100%;
+        }
+
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 60, 120, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Container for each badge & link */
+        .badge-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            /* Cubic bezier creates a smooth, spring-like interactive motion */
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Turn (rotate) and lower (translateY down) on hover */
+        .badge-item:hover {
+            transform: translateY(6px) rotate(4deg);
+        }
+
+        /* Alternate rotation direction slightly on hover for visual organic variety */
+        .badge-item:nth-child(even):hover {
+            transform: translateY(6px) rotate(-4deg);
+        }
+
+        .badge-item img {
+            width: 88px;
+            height: 31px;
+            display: block;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 61, 112, 0.3);
+            background-color: #000;
+            /* Keeps pixel-art web badges perfectly crisp */
+            image-rendering: pixelated;
+        }
+
+        .badge-name {
+            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            color: #96e6ff;
+            font-weight: 600;
+            max-width: 90px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* Grab our badge styling block */
+        .grab-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .grab-card img {
+            border: 2px solid #fff9;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .grab-card textarea {
+            flex: 1;
+            min-width: 250px;
+            height: 45px;
+            background: rgba(0, 30, 60, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #96e6ff;
+            border-radius: 6px;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 0.75rem;
+            resize: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .grab-card textarea:focus {
+            border-color: #96e6ff;
+        }
+
+        /* Updated media query for Tablet devices and smaller */
+        @media (max-width: 1024px) {
+            .h { flex-direction: column; height: auto; min-height: 100vh; }
+            .n { flex-direction: column; }
+
+            .i {
+                min-width: auto;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .i img {
+                max-height: 20vh;
+                object-fit: contain;
+                width: auto;
+                margin: 0 auto;
+            }
+
+            .badge-grid {
+                justify-content: center;
+            }
+
+            .m { min-height: 300px; }
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -999;
+            pointer-events: none;
+            overflow: hidden;
+            contain: strict;
+        }
+
+        .bg canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
+    <script>
+        let P=n=>(''+n).padStart(2,0),A,R=Math.random,p=()=>{A=A||new AudioContext;A.state=='suspended'&&A.resume();try{let o=A.createOscillator(),g=A.createGain(),t=A.currentTime,E=t+.08,S=(m,v,r)=>(m.setValueAtTime(v,t),m.exponentialRampToValueAtTime(r,E));S(o.frequency,150,800);S(g.gain,.12,.01);o.connect(g).connect(A.destination);o.start();o.stop(E)}catch{}};
+        setInterval(()=>{let s=(new Date-10315152e5)/1e3|0,d=s/864e2|0,e=document.getElementById('u');e&&(e.innerText=`My uptime:\n${d}d, ${P(s/36e2%24|0)}h, ${P(s/60%60|0)}m, ${P(s%60)}s\n(${d/365.25|0}y ♍)`)},1e3);
+        addEventListener("DOMContentLoaded",()=>{let D=document,g=D.body.appendChild(D.createElement("div")),c=(g.className="bg",g.appendChild(D.createElement("canvas"))),x=c.getContext("2d"),b=[],q=[],C=s=>{let r=R()*40+20;return{r,x:R()*c.width,y:s?c.height+r+R()*50:R()*c.height,vy:-(R()*1.2+.4),w:R()*100,ws:R()*.02+.01,wr:R()*.8+.2}},z=()=>{c.width=innerWidth;c.height=innerHeight;if(!b.length)for(let i=navigator.maxTouchPoints?8:16;i--;)b.push(C())},a=()=>{x.clearRect(0,0,c.width,c.height);b.forEach(o=>{o.y+=o.vy;o.w+=o.ws;o.x+=Math.sin(o.w)*o.wr;if(o.y<-o.r){o.y=c.height+o.r+R()*20;o.x=R()*c.width}let{x:X,y:Y,r:N}=o;x.shadowColor="#0cf6";x.shadowBlur=10;x.beginPath();x.arc(X,Y,N,0,7);x.strokeStyle="#fff6";x.lineWidth=1.5;x.stroke();let ox=X+N*.4,oy=Y+N*.4,rg=x.createRadialGradient(ox,oy,0,ox,oy,N*1.2);rg.addColorStop(0,"#0cf6");rg.addColorStop(.6,"#0cf0");x.fillStyle=rg;x.fill();x.shadowColor="#0000";x.shadowBlur=0;let lg=x.createLinearGradient(X,Y-.9*N,X,Y-.1*N);lg.addColorStop(0,"#fff8");lg.addColorStop(1,"#fff0");x.beginPath();x.ellipse(X,Y-.5*N,.7*N,.4*N,0,0,7);x.fillStyle=lg;x.fill()});for(let i=q.length;i--;){let o=q[i];o.x+=o.vx;o.y+=o.vy;o.vy+=.15;if((o.a-=.035)<=0)q.splice(i,1);else{x.globalAlpha=o.a;x.fillStyle='#fffd';x.beginPath();x.arc(o.x,o.y,o.r,0,7);x.fill()}}x.globalAlpha=1;requestAnimationFrame(a)},H=(X,Y)=>{for(let i=b.length;i--;){let o=b[i],u=o.x-X,v=o.y-Y;if(u*u+v*v<=o.r*o.r){for(let j=8;j--;)q.push({x:o.x,y:o.y,vx:(R()-.5)*6,vy:(R()-.5)*6-2,r:R()*3+1,a:1});p();b[i]=C(1);break}}};onmousedown=e=>H(e.clientX,e.clientY);ontouchstart=e=>{let[t]=e.touches;t&&H(t.clientX,t.clientY)};onresize=z;z();a()});
+    </script>
 </head>
 <body>
 
+<div class="h">
+
+    <!-- Sidebar block with the inline image and uptime indicator -->
+    <div class="i s">
+        <img src="assets/images/purtaruu.webp" alt="Project illustration">
+        <div id="u">My uptime: loading...</div>
+    </div>
+
+    <div class="v">
+        <nav class="n s">
+            <a href="/">Index</a>
+            <a href="/projects.html">Projects</a>
+            <a href="/nethood.html">The Vulpes Neighborhood</a>
+        </nav>
+        <main class="m s">
+            <div>
+                <h1>The Vulpes Neighborhood</h1>
+                <p style="margin-top: 0; color: #dcf8ff;">A collection of badges from friends, cool spaces, and cornerstones of our web neighborhood.</p>
+
+                <!-- Friends Badges Section -->
+                <div class="badge-section">
+                    <h2 style="font-size: 1.4rem; color: #fff;">Neighbours & Friends</h2>
+                    <div class="badge-grid">
+
+                        <!-- Placeholder Badge 1 -->
+                        <a href="https://therodev.com" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="https://therodev.com/svg/badge-uplink.svg" alt="Friend 1">
+                            <span class="badge-name">Thero</span>
+                        </a>
+
+                        <!-- Placeholder Badge 2 -->
+                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/88x31/0a4a6e/ffffff?text=Friend+2" alt="Friend 2">
+                            <span class="badge-name">Friend 2</span>
+                        </a>
+
+                        <!-- Placeholder Badge 3 -->
+                        <a href="https://txlyre.website" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="https://txlyre.website/88x31.gif" alt="Friend 3">
+                            <span class="badge-name">txlyre</span>
+                        </a>
+
+                        <!-- Placeholder Badge 4 -->
+                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/88x31/0a4a6e/ffffff?text=Friend+4" alt="Friend 4">
+                            <span class="badge-name">Friend 4</span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Directories & Webrings Section -->
+                <div class="badge-section">
+                    <h2 style="font-size: 1.4rem; color: #fff;">Webrings & Spaces</h2>
+                    <div class="badge-grid">
+
+                        <!-- Placeholder Badge 5 -->
+                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/88x31/003d70/ffffff?text=Webring+A" alt="Webring A">
+                            <span class="badge-name">Webring A</span>
+                        </a>
+
+                        <!-- Placeholder Badge 6 -->
+                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/88x31/003d70/ffffff?text=Webring+B" alt="Webring B">
+                            <span class="badge-name">Webring B</span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Grab Our Button Section -->
+                <div class="badge-section">
+                    <h2 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem;">Grab Our Button</h2>
+                    <div class="grab-card">
+                        <!-- Replace src with your actual button file path -->
+                        <img src="https://via.placeholder.com/88x31/0a4a6e/ffffff?text=Taruu" alt="Taruu's Button" width="88" height="31">
+                        <textarea readonly onclick="this.select()"><a href="https://taruu.dev" target="_blank"><img src="https://taruu.dev/button.gif" width="88" height="31" alt="Taruu"></a></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+</div>
 </body>
 </html>
