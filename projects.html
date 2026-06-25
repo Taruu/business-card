@@ -5,105 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taruu projects</title>
     <style>
-        :root {
-            /* Base Colors */
-            --bg-b: #0a4a6e;
-            --text-blue: #003d70;
-
-            /* Translucent Whites (Glass Edges & Highlights) */
-            --w-85: #ffffffd9;
-            --w-80: #ffffffcc;
-            --w-60: #ffffff99; /* Merged #FFFFFF99 and #FFFFFFA6 */
-            --w-50: #ffffff80; /* Merged #FFFFFF80 and #FFFFFF7F */
-            --w-40: #ffffff66; /* Converted rgba(255, 255, 255, 0.4) */
-
-            /* Glassmorphism Gradients */
-            --gbl: #b4f0ff59;
-            --gbm: #b4f0ffb2;
-            --gbd: #78dcff66;
-            --gcl: #dcf8ff99;
-
-            /* Text Shadows & Glows */
-            --sbd: #003d7099; /* Merged #003C7899 to match --text-blue */
-            --sg: #57575794;
-            --gc: #96e6ff66;
-            --bc: #00ccff66;
-
-            /* Blue Box Shadows */
-            --sb-20: #3296ff33;
-            --sb-40: #32b4ff59; /* Consolidated #32B4FF59 and #50B4FF66 */
-            --sb-60: #32b4ff99; /* Consolidated #64C8FF99 */
-
-            /* Mint/Cyan Box Shadow Glows */
-            --gm-10: #64ffc81a;
-            --gm-20: #64ffc833; /* Consolidated #96FFDC33 */
-            --gm-40: #64ffc866; /* Consolidated #B4FFE659 */
-        }
-
         body {
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
-            background: var(--bg-b) url(fa.webp) no-repeat;
-            background-size: cover;
-            backdrop-filter: blur(1ex);
-            text-shadow: 5px 5px 5px var(--sbd), 0 0 1rem var(--gc), var(--sg) 1px 1px 0;
-            text-decoration-color: var(--text-blue);
-
+            background-color: #0a4a6e;
+            color: #fff;
+            text-decoration-color: #003d70;
             font-size: 120%;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .c-h {
+        /* Hardware-accelerated background layer matching the index page */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: #0a4a6e url(fa.webp) no-repeat center/cover;
+            filter: blur(10px);
+            z-index: -1000;
+            transform: scale(1.05); /* Prevents white margins at edge of screen due to blur */
+            pointer-events: none;
+        }
+
+        /* Targeted glowing text aesthetics */
+        .m, .n a, h1, h4, caption, td, li {
+            text-shadow: 3px 3px 6px #003d7099, 0 0 10px #96e6ff66, #57575794 1px 1px 0;
+        }
+
+        .h {
             display: flex;
             box-sizing: border-box;
             padding: 1rem;
             gap: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .c-v {
+        .v {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             width: 100%;
         }
 
-        .boxsh {
-            box-shadow: 0 4px 16px var(--sb-40), inset 0 2px 3px var(--w-85);
-            background: linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
-            backdrop-filter: blur(12px) saturate(140%); /* Reduced blur from 20px for better performance */
+        .s {
+            box-shadow: 0 6px 24px #32b4ff59, 0 0 40px #64ffc81a, inset 0 2px 3px #ffffffd9;
+            background: linear-gradient(180deg, #fff8 0%, #b4f0ff59 50%, #78dcff66 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
         }
 
-        .flex-img-block {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .img-block {
-            position: relative;
-            width: 100%;
-        }
-
-        .img-block img {
-            position: absolute;
-            width: 100%;
-            object-fit: cover;
-
-        }
-
-        .img-block-shadowed {
-            background: url(assets/images/09.09.webp) top/75% no-repeat, linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
-            border: 2px solid var(--w-60);
+        /* Unified image block for the project page */
+        .i {
+            background: url(assets/images/09.09.webp) center/75% no-repeat, linear-gradient(180deg, #fff8 0%, #b4f0ff59 50%, #78dcff66 100%);
+            border: 2px solid #fff9;
+            min-width: 20vw;
+            min-height: 40vh;
             border-radius: 1rem;
-            height: 80vh;
+            height: fit-content;
             position: relative;
             overflow: hidden;
             padding: 1rem;
         }
 
-
-        .navbar {
-            border: 2px solid var(--w-60);
+        .n {
+            border: 2px solid #fff9;
             border-radius: 14px;
             padding: 10px;
             display: flex;
@@ -112,9 +80,10 @@
             overflow: clip;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
         }
 
-        .navbar a {
+        .n a {
             flex: 1 1 45px;
             display: flex;
             align-items: center;
@@ -123,34 +92,24 @@
             white-space: normal;
             word-wrap: break-word;
             position: relative;
-            background: linear-gradient(
-                    135deg,
-                    var(--w-80) 0%,
-                    var(--gcl) 50%,
-                    var(--gbm) 100%
-            );
-            border: 2px solid var(--w-80);
+            background: linear-gradient(135deg, #fffc 0%, #dcf8ff99 50%, #b4f0ffb2 100%);
+            border: 2px solid #fffc;
             border-radius: 1rem;
             padding: 1vw;
             font-size: 2ex;
-            color: var(--text-blue);
+            color: #003d70;
             font-weight: 700;
-            box-shadow: 0 4px 15px var(--sb-40),
-            0 0 30px var(--gm-20),
-            inset 0 2px 4px white,
-            inset 0 -2px 4px var(--sb-20);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px #32b4ff59, 0 0 30px #64ffc833, inset 0 2px 4px #fff, inset 0 -2px 4px #3296ff33;
+            transition: all .4s cubic-bezier(.16, 1, .3, 1);
             overflow: hidden;
         }
 
-        .navbar a:hover {
+        .n a:hover {
             transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 8px 25px var(--sb-60),
-            0 0 50px var(--gm-40),
-            inset 0 2px 4px white;
+            box-shadow: 0 8px 25px #32b4ff99, 0 0 50px #64ffc866, inset 0 2px 4px #fff;
         }
 
-        .content-m {
+        .m {
             border-radius: 1rem;
             display: flex;
             justify-content: flex-start;
@@ -160,178 +119,92 @@
             width: fit-content;
         }
 
-        @media (max-width: 1000px) {
-            .c-h {
-                flex-direction: column;
-                height: auto;
-                min-height: 100vh;
-            }
-
-            .navbar {
-                flex-direction: column;
-            }
-
-            .img-block-shadowed {
-                min-height: 15vh;
-                max-height: 25vh;
-            }
-
-            .img-block-shadowed img {
-                width: 90vw;
-                max-width: 100vw;
-            }
-
-            .content-m {
-                min-height: 300px;
-            }
-
-            tr {
-                display: grid;
-            }
-        }
-
-        .aero-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -999;
-            pointer-events: none;
-            overflow: hidden;
-            contain: strict;
-        }
-
-        .aero-bg i {
-            position: absolute;
-            bottom: -150px;
-            border-radius: 50%;
-            border: 1px solid var(--w-40);
-            background: radial-gradient(circle at 70% 70%, var(--bc) 0, transparent 60%);
-            filter: drop-shadow(0 0 8px var(--bc));
-            animation: up linear infinite;
-            will-change: auto;
-        }
-
-        .aero-bg i::after {
-            content: '';
-            position: absolute;
-            top: 5%;
-            left: 15%;
-            width: 70%;
-            height: 40%;
-            border-radius: 50%;
-            background: linear-gradient(var(--w-50), transparent);
-        }
-
-        @keyframes up {
-            0% {
-                transform: translate3d(0, 0, 0);
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translate3d(0, -120vh, 0);
-                opacity: 0;
-            }
-        }
-
-
+        /* Refined Glassmorphic Tables (Optimized) */
         table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.15); /* Keep semi-transparency */
+            /* REMOVED backdrop-filter to prevent nested rendering lag over canvas */
             border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 32px rgba(0, 60, 120, 0.2),
-            inset 0 0 15px rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 60, 120, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.2);
             overflow: hidden;
-            color: #003d70;
-
-
+            margin-top: 0.5rem;
+            margin-bottom: 2.5rem;
         }
 
         caption {
             text-align: left;
             font-weight: bold;
             font-size: 1.4rem;
-            padding: 10px;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8), 0 0 10px rgba(150, 230, 255, 0.5);
-            color: #004a80;
+            padding: 10px 0;
+            color: #fff;
         }
 
-
-        /* Cells */
         td, th {
-            padding: 1vh 0.3vw;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            border-right: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            vertical-align: top;
+            text-align: left;
         }
 
         td:last-child {
             border-right: none;
         }
 
-        /* Zebra Striping with Aero Glow */
-        tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        tr:nth-child(odd) {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Hover effect for rows */
-        tr:hover {
-            background: linear-gradient(
-                    to bottom,
-                    rgba(100, 200, 255, 0.4),
-                    rgba(100, 200, 255, 0.2)
-            );
-            cursor: default;
-        }
-
-        /* Style the links inside the table to look like glossy buttons or clean text */
-        table a {
-            color: #0056b3;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 4px;
-            transition: all 0.2s;
-        }
-
-        table a:hover {
-            background: #ffffff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            color: #008cff;
-        }
-
-        /* Rounded corners for the very first and last cells */
-        tr:first-child td:first-child {
-            border-top-left-radius: 10px;
-        }
-
-        tr:first-child td:last-child {
-            border-top-right-radius: 10px;
-        }
-
-        tr:last-child td:first-child {
-            border-bottom-left-radius: 10px;
-        }
-
-        tr:last-child td:last-child {
-            border-bottom-right-radius: 10px;
-        }
-
         tr:last-child td {
             border-bottom: none;
         }
 
-        .aero-bg {
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        table a {
+            color: #96e6ff;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: all 0.2s;
+        }
+
+        table a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px #96e6ff;
+        }
+
+        @media (max-width: 800px) {
+            .h { flex-direction: column; height: auto; min-height: 100vh; }
+            .n { flex-direction: column; }
+            .i { min-height: 15vh; background-size: contain; }
+            .m { min-height: 300px; }
+
+            /* Mobile-friendly table transformations */
+            table, tbody, tr, td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            tr {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                padding: 10px 0;
+            }
+            tr:last-child {
+                border-bottom: none;
+            }
+            td {
+                border: none;
+                padding: 6px 15px;
+            }
+        }
+
+        .bg {
             position: fixed;
             inset: 0;
             z-index: -999;
@@ -340,72 +213,35 @@
             contain: strict;
         }
 
-        .aero-bg canvas {
+        .bg canvas {
             position: absolute;
             left: 0;
             top: 0;
             width: 100vw;
-            height: 200vh;
+            height: 100vh;
             display: block;
-            animation: scrollUp 60s steps(3600) infinite;
-            will-change: transform; /* Hint to the browser to optimize compositing */
-        }
-
-        @keyframes scrollUp {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-            100% {
-                transform: translate3d(0, -50%, 0);
-            }
         }
     </style>
     <script>
-        const f = Math.floor;
-        const mr = Math.random;
-        let s, d, h, m, sc, y, c;
-        addEventListener("DOMContentLoaded", () => {
-            const d = document, b = d.body, g = b.appendChild(d.createElement("div")),
-                c = g.appendChild(d.createElement("canvas")), x = c.getContext("2d"), R = Math.random;
-            g.className = "aero-bg";
-            const draw = () => {
-                const dpr = devicePixelRatio || 1, w = innerWidth, h = innerHeight;
-                c.width = w * dpr, c.height = h * 2 * dpr, x.scale(dpr, dpr), x.clearRect(0, 0, w, h * 2);
-                const count = navigator.maxTouchPoints ? 10 : 20;
-                for (let i = 0; i < count; i++) {
-                    const r = R() * 50 + 30, bx = R() * w, by = R() * h;
-                    for (const y of [by, by + h, by - h]) if (y > -r && y - r < h * 2) {
-                        x.save(), x.shadowColor = "#0cf6", x.shadowBlur = 12, x.beginPath(), x.arc(bx, y, r, 0, 6.3), x.strokeStyle = "#fff6", x.lineWidth = 1.5, x.stroke();
-                        const ox = bx + r * .4, oy = y + r * .4,
-                            rg = x.createRadialGradient(ox, oy, 0, ox, oy, r * 1.2);
-                        rg.addColorStop(0, "#0cf6"), rg.addColorStop(.6, "#0cf0"), x.fillStyle = rg, x.fill(), x.shadowColor = "transparent", x.shadowBlur = 0;
-                        const lg = x.createLinearGradient(bx, y - .9 * r, bx, y - .1 * r);
-                        lg.addColorStop(0, "#fff8"), lg.addColorStop(1, "#fff0"), x.beginPath(), x.ellipse(bx, y - .5 * r, .7 * r, .4 * r, 0, 0, 6.3), x.fillStyle = lg, x.fill(), x.restore()
-                    }
-                }
-            };
-            draw(), onresize = draw
-        });
+        let P=n=>(''+n).padStart(2,0),A,R=Math.random,p=()=>{A=A||new AudioContext;A.state=='suspended'&&A.resume();try{let o=A.createOscillator(),g=A.createGain(),t=A.currentTime,E=t+.08,S=(m,v,r)=>(m.setValueAtTime(v,t),m.exponentialRampToValueAtTime(r,E));S(o.frequency,150,800);S(g.gain,.12,.01);o.connect(g).connect(A.destination);o.start();o.stop(E)}catch{}};
+        setInterval(()=>{let s=(new Date-10315152e5)/1e3|0,d=s/864e2|0,e=document.getElementById('u');e&&(e.innerText=`My uptime:\t${d}d, ${P(s/36e2%24|0)}h, ${P(s/60%60|0)}m, ${P(s%60)}s (${d/365.25|0}y ♍)`)},1e3);
+        addEventListener("DOMContentLoaded",()=>{let D=document,g=D.body.appendChild(D.createElement("div")),c=(g.className="bg",g.appendChild(D.createElement("canvas"))),x=c.getContext("2d"),b=[],q=[],C=s=>{let r=R()*40+20;return{r,x:R()*c.width,y:s?c.height+r+R()*50:R()*c.height,vy:-(R()*1.2+.4),w:R()*100,ws:R()*.02+.01,wr:R()*.8+.2}},z=()=>{c.width=innerWidth;c.height=innerHeight;if(!b.length)for(let i=navigator.maxTouchPoints?8:16;i--;)b.push(C())},a=()=>{x.clearRect(0,0,c.width,c.height);b.forEach(o=>{o.y+=o.vy;o.w+=o.ws;o.x+=Math.sin(o.w)*o.wr;if(o.y<-o.r){o.y=c.height+o.r+R()*20;o.x=R()*c.width}let{x:X,y:Y,r:N}=o;x.shadowColor="#0cf6";x.shadowBlur=10;x.beginPath();x.arc(X,Y,N,0,7);x.strokeStyle="#fff6";x.lineWidth=1.5;x.stroke();let ox=X+N*.4,oy=Y+N*.4,rg=x.createRadialGradient(ox,oy,0,ox,oy,N*1.2);rg.addColorStop(0,"#0cf6");rg.addColorStop(.6,"#0cf0");x.fillStyle=rg;x.fill();x.shadowColor="#0000";x.shadowBlur=0;let lg=x.createLinearGradient(X,Y-.9*N,X,Y-.1*N);lg.addColorStop(0,"#fff8");lg.addColorStop(1,"#fff0");x.beginPath();x.ellipse(X,Y-.5*N,.7*N,.4*N,0,0,7);x.fillStyle=lg;x.fill()});for(let i=q.length;i--;){let o=q[i];o.x+=o.vx;o.y+=o.vy;o.vy+=.15;if((o.a-=.035)<=0)q.splice(i,1);else{x.globalAlpha=o.a;x.fillStyle='#fffd';x.beginPath();x.arc(o.x,o.y,o.r,0,7);x.fill()}}x.globalAlpha=1;requestAnimationFrame(a)},H=(X,Y)=>{for(let i=b.length;i--;){let o=b[i],u=o.x-X,v=o.y-Y;if(u*u+v*v<=o.r*o.r){for(let j=8;j--;)q.push({x:o.x,y:o.y,vx:(R()-.5)*6,vy:(R()-.5)*6-2,r:R()*3+1,a:1});p();b[i]=C(1);break}}};onmousedown=e=>H(e.clientX,e.clientY);ontouchstart=e=>{let[t]=e.touches;t&&H(t.clientX,t.clientY)};onresize=z;z();a()});
     </script>
 </head>
 <body>
 
-<div class="c-h">
+<div class="h">
 
-    <div class="flex-img-block">
-        <div class="img-block">
-            <div class="img-block-shadowed boxsh">
-            </div>
-        </div>
+    <div class="i s">
     </div>
 
-    <div class="c-v">
-        <nav class="navbar boxsh">
+    <div class="v">
+        <nav class="n s">
             <a href="/">Index</a>
             <a href="/projects.html">Projects</a>
             <a href="/nethood.html">The Vulpes Neighborhood</a>
         </nav>
-        <main class="content-m boxsh">
+        <main class="m s">
             <div>
                 <h1>My projects</h1>
                 <div>
@@ -413,26 +249,17 @@
                         <caption>Software:</caption>
                         <tbody>
                         <tr>
-                            <td>This fox girl does not exist</td>
-                            <td><a href="https://thisfoxgirldoesnotexist.com/" rel="noopener noreferrer"
-                                   target="_blank">thisfoxgirldoesnotexist.com</a>
-                            </td>
-                            <td>This foxgirl does not exist. Foxgirl analog "This Person Does Not Exist"</td>
-                        </tr>
-
-                        <tr>
                             <td>Pixelization Bot</td>
                             <td>
-                                <a href=https://t.me/pixelizationaibot" rel="noopener noreferrer" target="_blank">
-                                    Pixelization Bot
-                                </a>(tg)<br>
-                                <a href=https://github.com/make-and-think/PixelizationBot" rel="noopener noreferrer"
+                                <a href="https://t.me/pixelizationaibot" rel="noopener noreferrer" target="_blank">
+                                    Pixelization Bot (tg)
+                                </a><br>
+                                <a href="https://github.com/make-and-think/PixelizationBot" rel="noopener noreferrer"
                                    target="_blank">
-                                    PixelizationBot
-                                </a>(github)
-
+                                    PixelizationBot (github)
+                                </a>
                             </td>
-                            <td>Pixelization Bot, use AI for convert any image into pixel art like</td>
+                            <td>Pixelization Bot, use AI to convert any image into pixel art style</td>
                         </tr>
 
                         <tr>
@@ -455,36 +282,54 @@
                             </td>
                             <td>demo for fastest file hash calculation in browser</td>
                         </tr>
+                        <tr>
+                            <td>tfgdne worker</td>
+                            <td>
+                                <a href="https://github.com/Taruu/tfgdne-worker" rel="noopener noreferrer"
+                                   target="_blank">
+                                    xxhash_fast_hash_big_files
+                                </a>
+                            </td>
+                            <td>Worker to generate image on Comfy UI/SD A1111</td>
+                        </tr>
                         </tbody>
                     </table>
 
                     <table>
-                        <caption>Cites:</caption>
+                        <caption>Sites:</caption>
                         <tbody>
                         <tr>
+                            <td>Chrono Edge</td>
                             <td>
-                                <a href="https://chrono-edge.taruu.ru/index.php/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+                                <a href="https://chrono-edge.taruu.dev/index.php/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
                                    rel="noopener noreferrer"
-                                   target="_blank">Chrono Edge</a>
+                                   target="_blank">Chrono Edge Wiki</a>
                             </td>
                             <td>Wiki of frozen RP project</td>
                         </tr>
                         <tr>
+                            <td>Nradiowave Wiki</td>
                             <td>
-                                <a href="https://nradiowave.taruu.ru/index.php/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
+                                <a href="https://nradiowave.taruu.dev/index.php/%D0%97%D0%B0%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F_%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%86%D0%B0"
                                    rel="noopener noreferrer"
                                    target="_blank">Nradiowave Wiki</a>
                             </td>
                             <td>Fan Wiki of nradiowave</td>
                         </tr>
                         <tr>
-                            <td><a href="   " rel="noopener noreferrer"
-                                   target="_blank">Text RP</a>
+                            <td>This fox girl does not exist</td>
+                            <td><a href="https://thisfoxgirldoesnotexist.com/" rel="noopener noreferrer"
+                                   target="_blank">thisfoxgirldoesnotexist.com</a>
                             </td>
-                            <td>Currently inprogress</td>
+                            <td>This foxgirl does not exist. Foxgirl analog "This Person Does Not Exist"</td>
                         </tr>
-
-
+                        <tr>
+                            <td>Collection of foxgirls</td>
+                            <td><a href="https://collection.foxgirls.party/" rel="noopener noreferrer"
+                                   target="_blank">collection.foxgirls.party</a>
+                            </td>
+                            <td>This foxgirl does not exist. Foxgirl analog "This Person Does Not Exist"</td>
+                        </tr>
                         </tbody>
                     </table>
 
@@ -492,66 +337,93 @@
                         <caption>Cute images</caption>
                         <tbody>
                         <tr>
+                            <td>@fox_folder</td>
                             <td>
-                                <a href="https://t.me/fox_folder">@fox_folder</a>
+                                <a href="https://t.me/fox_folder" rel="noopener noreferrer" target="_blank">@fox_folder</a>
                             </td>
                             <td>Collection of cute fox girl images</td>
                         </tr>
                         <tr>
+                            <td>@robot_folder</td>
                             <td>
-                                <a href="https://t.me/robot_folder">@robot_folder</a>
+                                <a href="https://t.me/robot_folder" rel="noopener noreferrer" target="_blank">@robot_folder</a>
                             </td>
                             <td>Collection of cute robot images</td>
                         </tr>
                         <tr>
+                            <td>@cat_folder</td>
                             <td>
-                                <a href="https://t.me/cat_folder">@cat_folder</a>
+                                <a href="https://t.me/cat_folder" rel="noopener noreferrer" target="_blank">@cat_folder</a>
                             </td>
                             <td>Collection of cute cat images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/rabbit_folder">@rabbit_folder</a></td>
+                            <td>@rabbit_folder</td>
+                            <td>
+                                <a href="https://t.me/rabbit_folder" rel="noopener noreferrer" target="_blank">@rabbit_folder</a>
+                            </td>
                             <td>Collection of cute rabbit images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/mouse_folder">@mouse_folder</a></td>
+                            <td>@mouse_folder</td>
+                            <td>
+                                <a href="https://t.me/mouse_folder" rel="noopener noreferrer" target="_blank">@mouse_folder</a>
+                            </td>
                             <td>Collection of cute mouse images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/snake_folder">@snake_folder</a></td>
+                            <td>@snake_folder</td>
+                            <td>
+                                <a href="https://t.me/snake_folder" rel="noopener noreferrer" target="_blank">@snake_folder</a>
+                            </td>
                             <td>Collection of cute snake images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/dragon_folder">@dragon_folder</a></td>
+                            <td>@dragon_folder</td>
+                            <td>
+                                <a href="https://t.me/dragon_folder" rel="noopener noreferrer" target="_blank">@dragon_folder</a>
+                            </td>
                             <td>Collection of cute dragon images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/spider_folder">@spider_folder</a></td>
+                            <td>@spider_folder</td>
+                            <td>
+                                <a href="https://t.me/spider_folder" rel="noopener noreferrer" target="_blank">@spider_folder</a>
+                            </td>
                             <td>Collection of cute spider images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/bird_folder">@bird_folder</a></td>
+                            <td>@bird_folder</td>
+                            <td>
+                                <a href="https://t.me/bird_folder" rel="noopener noreferrer" target="_blank">@bird_folder</a>
+                            </td>
                             <td>Collection of cute bird images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/dog_folder">@dog_folder</a></td>
+                            <td>@dog_folder</td>
+                            <td>
+                                <a href="https://t.me/dog_folder" rel="noopener noreferrer" target="_blank">@dog_folder</a>
+                            </td>
                             <td>Collection of cute dog images</td>
                         </tr>
                         <tr>
-                            <td><a href="https://t.me/wolf_folder">@wolf_folder</a></td>
+                            <td>@wolf_folder</td>
+                            <td>
+                                <a href="https://t.me/wolf_folder" rel="noopener noreferrer" target="_blank">@wolf_folder</a>
+                            </td>
                             <td>Collection of cute wolf images</td>
                         </tr>
                         <tr>
+                            <td>@ai_folder</td>
                             <td>
-                                <a href="https://t.me/ai_folder">@ai_folder</a>
+                                <a href="https://t.me/ai_folder" rel="noopener noreferrer" target="_blank">@ai_folder</a>
                             </td>
-                            <td>Collection of personal ai arts images</td>
+                            <td>Collection of personal AI art images</td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </main>
     </div>
 </div>
