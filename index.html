@@ -13,9 +13,9 @@
             /* Translucent Whites (Glass Edges & Highlights) */
             --w-85: #ffffffd9;
             --w-80: #ffffffcc;
-            --w-60: #ffffff99; /* Merged #FFFFFF99 and #FFFFFFA6 */
-            --w-50: #ffffff80; /* Merged #FFFFFF80 and #FFFFFF7F */
-            --w-40: #ffffff66; /* Converted rgba(255, 255, 255, 0.4) */
+            --w-60: #ffffff99;
+            --w-50: #ffffff80;
+            --w-40: #ffffff66;
 
             /* Glassmorphism Gradients */
             --gbl: #b4f0ff59;
@@ -24,33 +24,50 @@
             --gcl: #dcf8ff99;
 
             /* Text Shadows & Glows */
-            --sbd: #003d7099; /* Merged #003C7899 to match --text-blue */
+            --sbd: #003d7099;
             --sg: #57575794;
             --gc: #96e6ff66;
             --bc: #00ccff66;
 
             /* Blue Box Shadows */
             --sb-20: #3296ff33;
-            --sb-40: #32b4ff59; /* Consolidated #32B4FF59 and #50B4FF66 */
-            --sb-60: #32b4ff99; /* Consolidated #64C8FF99 */
+            --sb-40: #32b4ff59;
+            --sb-60: #32b4ff99;
 
             /* Mint/Cyan Box Shadow Glows */
             --gm-10: #64ffc81a;
-            --gm-20: #64ffc833; /* Consolidated #96FFDC33 */
-            --gm-40: #64ffc866; /* Consolidated #B4FFE659 */
+            --gm-20: #64ffc833;
+            --gm-40: #64ffc866;
         }
 
         body {
             margin: 0;
             font-family: "Segoe UI", Tahoma, sans-serif;
-            background: var(--bg-b) url(fa.webp) no-repeat;
-            background-size: cover;
-            backdrop-filter: blur(1ex);
-            text-shadow: 5px 5px 5px var(--sbd), 0 0 1rem var(--gc), var(--sg) 1px 1px 0;
+            background-color: var(--bg-b);
+            color: #ffffff;
             text-decoration-color: var(--text-blue);
-
             font-size: 120%;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hardware-accelerated background layer to replace the expensive body backdrop-filter */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: var(--bg-b) url(fa.webp) no-repeat;
+            background-size: cover;
+            filter: blur(10px);
+            z-index: -1000;
+            transform: scale(1.05); /* Prevents white margins at edge of screen due to blur */
+            pointer-events: none;
+        }
+
+        /* Targeted glowing text aesthetics to improve overall paint performance */
+        .content-m, .navbar a, h1, h4, caption, td, li {
+            text-shadow: 3px 3px 6px var(--sbd), 0 0 10px var(--gc), var(--sg) 1px 1px 0;
         }
 
         .c-h {
@@ -58,6 +75,8 @@
             box-sizing: border-box;
             padding: 1rem;
             gap: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .c-v {
@@ -71,6 +90,7 @@
             box-shadow: 0 6px 24px var(--sb-40), 0 0 40px var(--gm-10), inset 0 2px 3px var(--w-85);
             background: linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
             backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
         }
 
         .img-block-shadowed {
@@ -173,47 +193,21 @@
             contain: strict;
         }
 
-        .aero-bg i {
+        .aero-bg canvas {
             position: absolute;
-            bottom: -150px;
-            border-radius: 50%;
-            border: 1px solid var(--w-40);
-            background: radial-gradient(circle at 70% 70%, var(--bc) 0, transparent 60%);
-            filter: drop-shadow(0 0 8px var(--bc));
-            animation: up linear infinite;
-            will-change: auto;
-        }
-
-        .aero-bg i::after {
-            content: '';
-            position: absolute;
-            top: 5%;
-            left: 15%;
-            width: 70%;
-            height: 40%;
-            border-radius: 50%;
-            background: linear-gradient(var(--w-50), transparent);
-        }
-
-        @keyframes up {
-            0% {
-                transform: translate3d(0, 0, 0);
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translate3d(0, -120vh, 0);
-                opacity: 0;
-            }
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            display: block;
         }
     </style>
     <script>
-        let s, d, h, m, sc, y, c, p, mr, f;
+        // System Uptime Script
+        let s, d, h, m, sc, y, p, f;
         p = (num) => num.toString().padStart(2, '0');
         f = Math.floor;
-        mr = Math.random;
+
         setInterval(() => {
             s = f((new Date() - new Date(1031515200000)) / 1000);
             d = f(s / 86400);
@@ -221,19 +215,108 @@
             m = f((s % 3600) / 60);
             sc = s % 60;
             y = f(d / 365.25);
-            document.getElementById('my-uptime').innerText =
-                `My uptime:\t${d}d, ${p(h)}h, ${p(m)}m, ${p(sc)}s (${y}y ♍)`;
+            const el = document.getElementById('my-uptime');
+            if (el) {
+                el.innerText = `My uptime:\t${d}d, ${p(h)}h, ${p(m)}m, ${p(sc)}s (${y}y ♍)`;
+            }
         }, 1000);
-        document.addEventListener("DOMContentLoaded", () => {
-            h = "";
-            for (let i = 0; i < 15 - (navigator.maxTouchPoints > 0 ? 10 : 0); i++) {
-                c = Math.random() * 100 + 60;
-                h += `<i style="left:${p(mr() * 100)}%;width:${p(c)}px;height:${p(c)}px;animation-duration:${p(mr() * 10 + 5)}s;animation-delay:${p(mr() * 8 + 1)}s"></i>`;
+
+        // Hardware-Accelerated High Frame-Rate Bubbles Engine
+        addEventListener("DOMContentLoaded", () => {
+            const d = document, b = d.body;
+            const g = b.appendChild(d.createElement("div"));
+            g.className = "aero-bg";
+            const c = g.appendChild(d.createElement("canvas"));
+            const x = c.getContext("2d");
+
+            let bubbles = [];
+            // Adaptive count helps keep performance smooth on both mobile and desktop
+            const count = navigator.maxTouchPoints ? 8 : 16;
+
+            class Bubble {
+                constructor(spawnAtBottom = false) {
+                    this.r = Math.random() * 40 + 20;
+                    this.x = Math.random() * c.width;
+                    this.y = spawnAtBottom ? c.height + this.r + Math.random() * 50 : Math.random() * c.height;
+                    this.vy = -(Math.random() * 1.2 + 0.4);
+                    this.wobble = Math.random() * 100;
+                    this.wobbleSpeed = Math.random() * 0.02 + 0.01;
+                    this.wobbleRange = Math.random() * 0.8 + 0.2;
+                }
+
+                update() {
+                    this.y += this.vy;
+                    this.wobble += this.wobbleSpeed;
+                    this.x += Math.sin(this.wobble) * this.wobbleRange;
+
+                    // Reset position when bubble floats out of view
+                    if (this.y < -this.r) {
+                        this.y = c.height + this.r + Math.random() * 20;
+                        this.x = Math.random() * c.width;
+                    }
+                }
+
+                draw() {
+                    const bx = this.x, y = this.y, r = this.r;
+                    x.save();
+
+                    // Bubble Outer Rim/Glow
+                    x.shadowColor = "#0cf6";
+                    x.shadowBlur = 10;
+                    x.beginPath();
+                    x.arc(bx, y, r, 0, Math.PI * 2);
+                    x.strokeStyle = "#fff6";
+                    x.lineWidth = 1.5;
+                    x.stroke();
+
+                    // Radial Gradient Core
+                    const ox = bx + r * .4, oy = y + r * .4;
+                    const rg = x.createRadialGradient(ox, oy, 0, ox, oy, r * 1.2);
+                    rg.addColorStop(0, "#0cf6");
+                    rg.addColorStop(.6, "#0cf0");
+                    x.fillStyle = rg;
+                    x.fill();
+
+                    // Remove shadows before drawing the gloss highlight to maximize draw speeds
+                    x.shadowColor = "transparent";
+                    x.shadowBlur = 0;
+
+                    // Specular Linear highlight
+                    const lg = x.createLinearGradient(bx, y - .9 * r, bx, y - .1 * r);
+                    lg.addColorStop(0, "#fff8");
+                    lg.addColorStop(1, "#fff0");
+                    x.beginPath();
+                    x.ellipse(bx, y - .5 * r, .7 * r, .4 * r, 0, 0, Math.PI * 2);
+                    x.fillStyle = lg;
+                    x.fill();
+
+                    x.restore();
+                }
             }
 
-            document.body.insertAdjacentHTML('beforeend', `<div class="aero-bg">${h}</div>`);
-        });
+            const resize = () => {
+                c.width = window.innerWidth;
+                c.height = window.innerHeight;
+                if (bubbles.length === 0) {
+                    for (let i = 0; i < count; i++) {
+                        bubbles.push(new Bubble(false));
+                    }
+                }
+            };
 
+            const animate = () => {
+                x.clearRect(0, 0, c.width, c.height);
+                for (let i = 0; i < bubbles.length; i++) {
+                    bubbles[i].update();
+                    bubbles[i].draw();
+                }
+                requestAnimationFrame(animate);
+            };
+
+            window.addEventListener("resize", resize);
+            resize();
+            animate();
+        });
     </script>
 </head>
 <body>
@@ -303,7 +386,7 @@
                 <div>
                     <h4>Some facts:</h4>
                     <ul>
-                        <li id="my-uptime"></li>
+                        <li id="my-uptime">Loading uptime...</li>
                         <li>I like fox girls</li>
                         <li style="color: orange">I like orange</li>
                         <li><a target="_blank" href="https://radio.taruu.ru">Check my radio</a></li>
@@ -315,6 +398,5 @@
         </main>
     </div>
 </div>
-<video id="bgb"></video>
 </body>
 </html>

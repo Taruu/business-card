@@ -68,9 +68,9 @@
         }
 
         .boxsh {
-            box-shadow: 0 6px 24px var(--sb-40), 0 0 40px var(--gm-10), inset 0 2px 3px var(--w-85);
+            box-shadow: 0 4px 16px var(--sb-40), inset 0 2px 3px var(--w-85);
             background: linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
-            backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(12px) saturate(140%); /* Reduced blur from 20px for better performance */
         }
 
         .flex-img-block {
@@ -79,10 +79,11 @@
             justify-content: center;
         }
 
-        .img-block{
+        .img-block {
             position: relative;
             width: 100%;
         }
+
         .img-block img {
             position: absolute;
             width: 100%;
@@ -91,17 +92,13 @@
         }
 
         .img-block-shadowed {
-            background: linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
+            background: url(assets/images/09.09.webp) top/75% no-repeat, linear-gradient(180deg, var(--w-50) 0%, var(--gbl) 50%, var(--gbd) 100%);
             border: 2px solid var(--w-60);
             border-radius: 1rem;
+            height: 80vh;
+            position: relative;
+            overflow: hidden;
             padding: 1rem;
-            overflow: clip;
-            height: 1000px
-        }
-        .img-block-shadowed img {
-            position: marker;
-            clip-path: polygon(0% 0%, 55% 0%, 55% 50%, 66% 50%, 66% 100%, 0% 100%);
-
         }
 
 
@@ -178,6 +175,7 @@
                 min-height: 15vh;
                 max-height: 25vh;
             }
+
             .img-block-shadowed img {
                 width: 90vw;
                 max-width: 100vw;
@@ -186,10 +184,12 @@
             .content-m {
                 min-height: 300px;
             }
+
             tr {
                 display: grid;
             }
         }
+
         .aero-bg {
             position: fixed;
             inset: 0;
@@ -330,18 +330,61 @@
         tr:last-child td {
             border-bottom: none;
         }
+
+        .aero-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -999;
+            pointer-events: none;
+            overflow: hidden;
+            contain: strict;
+        }
+
+        .aero-bg canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 200vh;
+            display: block;
+            animation: scrollUp 60s steps(3600) infinite;
+            will-change: transform; /* Hint to the browser to optimize compositing */
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                transform: translate3d(0, -50%, 0);
+            }
+        }
     </style>
     <script>
         const f = Math.floor;
         const mr = Math.random;
         let s, d, h, m, sc, y, c;
-        document.addEventListener("DOMContentLoaded", () => {
-            h = "";
-            for (let i = 0; i < 15 - (navigator.maxTouchPoints > 0 ? 10 : 0); i++) {
-                c = Math.random() * 100 + 60;
-                h += `<i style="left:${mr() * 100}%;width:${c}px;height:${c}px;animation-duration:${mr() * 10 + 5}s;animation-delay:${mr() * 8 + 1}s"></i>`;
-            }
-            document.body.insertAdjacentHTML('beforeend', `<div class="aero-bg">${h}</div>`);
+        addEventListener("DOMContentLoaded", () => {
+            const d = document, b = d.body, g = b.appendChild(d.createElement("div")),
+                c = g.appendChild(d.createElement("canvas")), x = c.getContext("2d"), R = Math.random;
+            g.className = "aero-bg";
+            const draw = () => {
+                const dpr = devicePixelRatio || 1, w = innerWidth, h = innerHeight;
+                c.width = w * dpr, c.height = h * 2 * dpr, x.scale(dpr, dpr), x.clearRect(0, 0, w, h * 2);
+                const count = navigator.maxTouchPoints ? 10 : 20;
+                for (let i = 0; i < count; i++) {
+                    const r = R() * 50 + 30, bx = R() * w, by = R() * h;
+                    for (const y of [by, by + h, by - h]) if (y > -r && y - r < h * 2) {
+                        x.save(), x.shadowColor = "#0cf6", x.shadowBlur = 12, x.beginPath(), x.arc(bx, y, r, 0, 6.3), x.strokeStyle = "#fff6", x.lineWidth = 1.5, x.stroke();
+                        const ox = bx + r * .4, oy = y + r * .4,
+                            rg = x.createRadialGradient(ox, oy, 0, ox, oy, r * 1.2);
+                        rg.addColorStop(0, "#0cf6"), rg.addColorStop(.6, "#0cf0"), x.fillStyle = rg, x.fill(), x.shadowColor = "transparent", x.shadowBlur = 0;
+                        const lg = x.createLinearGradient(bx, y - .9 * r, bx, y - .1 * r);
+                        lg.addColorStop(0, "#fff8"), lg.addColorStop(1, "#fff0"), x.beginPath(), x.ellipse(bx, y - .5 * r, .7 * r, .4 * r, 0, 0, 6.3), x.fillStyle = lg, x.fill(), x.restore()
+                    }
+                }
+            };
+            draw(), onresize = draw
         });
     </script>
 </head>
@@ -352,9 +395,7 @@
     <div class="flex-img-block">
         <div class="img-block">
             <div class="img-block-shadowed boxsh">
-                <img src="assets/images/taruu-back.webp">
             </div>
-            <img src="assets/images/taruu-back.webp">
         </div>
     </div>
 
