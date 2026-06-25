@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" viewBox="0 0 88 31">
+    <!-- Outer Dark Border -->
+    <rect x="0.5" y="0.5" width="87" height="30" fill="#0d1117" stroke="#010409" stroke-width="1"/>
+
+    <!-- Left Side Panel (Background Gradient & Bevel) -->
+    <defs>
+        <linearGradient id="left-bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1f1a3a"/>
+            <stop offset="100%" stop-color="#151324"/>
+        </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="25" height="29" fill="url(#left-bg)"/>
+
+    <!-- Classic 3D Bevel Highlights -->
+    <!-- Top Highlight -->
+    <line x1="1" y1="1" x2="87" y2="1" stroke="#444d56" stroke-width="1"/>
+    <!-- Left Highlight -->
+    <line x1="1" y1="1" x2="1" y2="30" stroke="#444d56" stroke-width="1"/>
+    <!-- Bottom Shadow -->
+    <line x1="1" y1="30" x2="87" y2="30" stroke="#161b22" stroke-width="1"/>
+    <!-- Right Shadow -->
+    <line x1="87" y1="1" x2="87" y2="30" stroke="#161b22" stroke-width="1"/>
+
+    <!-- Vertical Divider -->
+    <line x1="26" y1="1" x2="26" y2="30" stroke="#30363d"/>
+
+    <!-- Left Icon: Lambda (λ) for PLT/Functional Programming -->
+    <path d="M 16,8 C 14.5,11 12.5,17 11.5,22 M 13.5,14 L 17,22" stroke="#a371f7" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- Right Side Text -->
+    <!-- Username -->
+    <text x="31" y="13" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="bold" fill="#c9d1d9">luna-spirito</text>
+    <!-- Role/Field -->
+    <text x="31" y="23" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="6.5" font-weight="600" fill="#8b949e" letter-spacing="0.2">PLT RESEARCH</text>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="88" height="31" viewBox="0 0 88 31" shape-rendering="crispEdges">
+    <defs>
+        <!-- Scanline pattern for retro CRT effect -->
+        <pattern id="scanline" width="1" height="2" patternUnits="userSpaceOnUse">
+            <rect width="1" height="1" fill="#000000" fill-opacity="0.15"/>
+        </pattern>
+    </defs>
+
+    <!-- Outer Border (Black) -->
+    <rect x="0" y="0" width="88" height="31" fill="#000000" />
+
+    <!-- Left Side Background (Doge Gold) -->
+    <rect x="1" y="1" width="26" height="29" fill="#e5a83b" />
+
+    <!-- Divider Line -->
+    <rect x="27" y="1" width="1" height="29" fill="#000000" />
+
+    <!-- Right Side Background (Dark GitHub Theme) -->
+    <rect x="28" y="1" width="59" height="29" fill="#0d1117" />
+
+    <!-- Left Bevel Highlights (3D Button Effect) -->
+    <line x1="1" y1="1" x2="26" y2="1" stroke="#ffffff" stroke-opacity="0.4" />
+    <line x1="1" y1="1" x2="1" y2="28" stroke="#ffffff" stroke-opacity="0.4" />
+    <line x1="1" y1="29" x2="26" y2="29" stroke="#000000" stroke-opacity="0.3" />
+    <line x1="26" y1="1" x2="26" y2="29" stroke="#000000" stroke-opacity="0.3" />
+
+    <!-- Right Bevel Highlights (3D Button Effect) -->
+    <line x1="28" y1="1" x2="86" y2="1" stroke="#ffffff" stroke-opacity="0.15" />
+    <line x1="28" y1="1" x2="28" y2="28" stroke="#ffffff" stroke-opacity="0.15" />
+    <line x1="28" y1="29" x2="86" y2="29" stroke="#000000" stroke-opacity="0.4" />
+    <line x1="86" y1="1" x2="86" y2="29" stroke="#000000" stroke-opacity="0.4" />
+
+    <!-- Doge Pixel Art (14x11) centered at x=7, y=9 -->
+    <g transform="translate(7, 9)">
+        <!-- Ears -->
+        <rect x="1" y="1" width="3" height="2" fill="#e5b567"/>
+        <rect x="1" y="1" width="1" height="2" fill="#b87a21"/>
+        <rect x="2" y="0" width="1" height="1" fill="#b87a21"/>
+
+        <rect x="10" y="1" width="3" height="2" fill="#e5b567"/>
+        <rect x="12" y="1" width="1" height="2" fill="#b87a21"/>
+        <rect x="11" y="0" width="1" height="1" fill="#b87a21"/>
+
+        <!-- Head & Cheeks -->
+        <rect x="1" y="3" width="12" height="7" fill="#e5b567"/>
+        <rect x="0" y="4" width="1" height="5" fill="#b87a21"/>
+        <rect x="13" y="4" width="1" height="5" fill="#b87a21"/>
+        <rect x="1" y="10" width="12" height="1" fill="#b87a21"/>
+
+        <!-- White muzzle & cheeks -->
+        <rect x="1" y="6" width="3" height="3" fill="#ffffff"/>
+        <rect x="10" y="6" width="3" height="3" fill="#ffffff"/>
+        <rect x="4" y="7" width="6" height="3" fill="#ffffff"/>
+
+        <!-- Eyes -->
+        <rect x="3" y="5" width="2" height="2" fill="#1e140a"/>
+        <rect x="9" y="5" width="2" height="2" fill="#1e140a"/>
+        <rect x="3" y="5" width="1" height="1" fill="#ffffff"/>
+        <rect x="9" y="5" width="1" height="1" fill="#ffffff"/>
+
+        <!-- Nose -->
+        <rect x="6" y="7" width="2" height="1" fill="#1e140a"/>
+        <rect x="6" y="8" width="2" height="1" fill="#b87a21"/>
+
+        <!-- Blush -->
+        <rect x="2" y="8" width="1" height="1" fill="#ff8a8a"/>
+        <rect x="11" y="8" width="1" height="1" fill="#ff8a8a"/>
+    </g>
+
+    <!-- Text elements -->
+    <!-- "jit.rs" text shadow -->
+    <text x="58" y="14" font-family="Verdana, Geneva, sans-serif" font-size="9" font-weight="bold" fill="#000000" text-anchor="middle">jit.rs</text>
+    <!-- "jit.rs" text foreground (Rust orange color) -->
+    <text x="57" y="13" font-family="Verdana, Geneva, sans-serif" font-size="9" font-weight="bold" fill="#ff7a00" text-anchor="middle">jit.rs</text>
+
+    <!-- "USER" text shadow -->
+    <text x="58" y="24" font-family="Verdana, Geneva, sans-serif" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle" letter-spacing="1">USER</text>
+    <!-- "USER" text foreground (White) -->
+    <text x="57" y="23" font-family="Verdana, Geneva, sans-serif" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="1">USER</text>
+
+    <!-- Decorative Corner Retro Sparkles -->
+    <rect x="32" y="4" width="1" height="1" fill="#ff7a00"/>
+    <rect x="81" y="5" width="2" height="2" fill="#ffffff" fill-opacity="0.6"/>
+
+    <!-- Scanline Overlay -->
+    <rect x="1" y="1" width="86" height="29" fill="url(#scanline)" pointer-events="none" />
+</svg>

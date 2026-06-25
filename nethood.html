@@ -41,6 +41,7 @@
             gap: 1rem;
             position: relative;
             z-index: 1;
+            width: 100%; /* Fills the screen width completely from the left edge */
         }
 
         .v {
@@ -60,34 +61,36 @@
         /* Unified image block for the sidebar */
         .i {
             border: 2px solid #fff9;
-            min-width: 15vw;
-            max-width: 25vw;
+            width: 280px; /* Constrains sidebar size on FullHD and larger screens */
+            flex-shrink: 0;
+            box-sizing: border-box;
             border-radius: 1rem;
             height: fit-content;
             position: relative;
             overflow: hidden;
-            padding: 1rem;
+            padding: 0; /* Removed padding so the image touches the borders */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             background: linear-gradient(180deg, #fff8 0%, #b4f0ff59 50%, #78dcff66 100%);
+            width: 25vw;
         }
 
         .i img {
             width: 100%;
-            max-width: 75%;
+            max-width: 100%; /* Spans the image edge-to-edge horizontally */
             height: auto;
             display: block;
-            border-radius: 0.5rem;
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+            border-radius: 14px 14px 0 0; /* Rounds only top corners to align with the frame */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
         }
 
         /* Uptime style container in sidebar */
         #u {
             font-size: 0.75rem;
-            margin-top: 1rem;
+            margin: 1rem 0; /* Added margin for vertical spacing */
             text-align: center;
             color: #dcf8ff;
             text-shadow: 0 2px 4px #003d70;
@@ -252,13 +255,17 @@
             .i {
                 min-width: auto;
                 width: 100%;
+                flex-shrink: 1;
                 box-sizing: border-box;
+                padding: 0;
+                width: 97vw;
             }
             .i img {
                 max-height: 20vh;
                 object-fit: contain;
                 width: auto;
                 margin: 0 auto;
+                border-radius: 14px 14px 0 0;
             }
 
             .badge-grid {
@@ -304,9 +311,9 @@
 
     <div class="v">
         <nav class="n s">
-            <a href="/">Index</a>
-            <a href="/projects.html">Projects</a>
-            <a href="/nethood.html">The Vulpes Neighborhood</a>
+            <a href="index.html">Index</a>
+            <a href="projects.html">Projects</a>
+            <a href="nethood.html">The Vulpes Neighborhood</a>
         </nav>
         <main class="m s">
             <div>
@@ -318,48 +325,91 @@
                     <h2 style="font-size: 1.4rem; color: #fff;">Neighbours & Friends</h2>
                     <div class="badge-grid">
 
-                        <!-- Placeholder Badge 1 -->
                         <a href="https://therodev.com" class="badge-item" target="_blank" rel="noopener noreferrer">
                             <img src="https://therodev.com/svg/badge-uplink.svg" alt="Friend 1">
                             <span class="badge-name">Thero</span>
                         </a>
 
-                        <!-- Placeholder Badge 2 -->
-                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/88x31/0a4a6e/ffffff?text=Friend+2" alt="Friend 2">
-                            <span class="badge-name">Friend 2</span>
+                        <a href="https://github.com/bropines" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/bropines.svg" alt="Friend 4">
+                            <span class="badge-name">Bropines</span>
                         </a>
 
-                        <!-- Placeholder Badge 3 -->
+                        <a href="https://lappee.site" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/lappee.webp" alt="Friend 2">
+                            <span class="badge-name">Lappee</span>
+                        </a>
+
                         <a href="https://txlyre.website" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="https://txlyre.website/88x31.gif" alt="Friend 3">
+                            <img src="assets/buts/txlyre.gif" alt="Friend 3">
                             <span class="badge-name">txlyre</span>
                         </a>
 
-                        <!-- Placeholder Badge 4 -->
-                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/88x31/0a4a6e/ffffff?text=Friend+4" alt="Friend 4">
-                            <span class="badge-name">Friend 4</span>
-                        </a>
 
                     </div>
                 </div>
 
-                <!-- Directories & Webrings Section -->
                 <div class="badge-section">
-                    <h2 style="font-size: 1.4rem; color: #fff;">Webrings & Spaces</h2>
+                    <h2 style="font-size: 1.4rem; color: #fff;">Cool Guys</h2>
                     <div class="badge-grid">
 
-                        <!-- Placeholder Badge 5 -->
-                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/88x31/003d70/ffffff?text=Webring+A" alt="Webring A">
-                            <span class="badge-name">Webring A</span>
+                        <a href="https://github.com/luna-spirito" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/luna_spirito.svg" alt="Friend 1">
+                            <span class="badge-name">Thero</span>
                         </a>
 
-                        <!-- Placeholder Badge 6 -->
-                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/88x31/003d70/ffffff?text=Webring+B" alt="Webring B">
-                            <span class="badge-name">Webring B</span>
+                        <a href="https://romkazvo.ru/" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/romkazvo.svg" alt="Friend 1">
+                            <span class="badge-name">RomkaZVO</span>
+                        </a>
+                        <a href="https://github.com/serid" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/jit-rs.svg" alt="Friend 1">
+                            <span class="badge-name">jit.rs</span>
+                        </a>
+                        <a href="https://vdsap.com" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/vdsap.svg" alt="Friend 4">
+                            <span class="badge-name">Vdsap</span>
+                        </a>
+
+
+                    </div>
+                </div>
+
+<!--                &lt;!&ndash; Directories & Webrings Section &ndash;&gt;-->
+<!--                <div class="badge-section">-->
+<!--                    <h2 style="font-size: 1.4rem; color: #fff;">Webrings & Spaces</h2>-->
+<!--                    <div class="badge-grid">-->
+
+<!--                        &lt;!&ndash; Placeholder Badge 5 &ndash;&gt;-->
+<!--                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">-->
+<!--                            <img src="https://via.placeholder.com/88x31/003d70/ffffff?text=Webring+A" alt="Webring A">-->
+<!--                            <span class="badge-name">Webring A</span>-->
+<!--                        </a>-->
+
+<!--                        &lt;!&ndash; Placeholder Badge 6 &ndash;&gt;-->
+<!--                        <a href="https://example.com" class="badge-item" target="_blank" rel="noopener noreferrer">-->
+<!--                            <img src="https://via.placeholder.com/88x31/003d70/ffffff?text=Webring+B" alt="Webring B">-->
+<!--                            <span class="badge-name">Webring B</span>-->
+<!--                        </a>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="badge-section">
+                    <h2 style="font-size: 1.4rem; color: #fff;">Also btw</h2>
+                    <div class="badge-grid">
+
+                        <a href="https://www.kernel.org/" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/xenia_PBL_big.gif" alt="Webring A">
+                            <span class="badge-name">Get Kernled</span>
+                        </a>
+
+                        <a href="https://debian.org" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/powered-by-debian.gif" alt="Webring B">
+                            <span class="badge-name">Get Debian</span>
+                        </a>
+                        <a href="https://proxmox.com/" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/proxmox.svg" alt="Webring B">
+                            <span class="badge-name">Get Proxmox</span>
                         </a>
 
                     </div>
@@ -370,8 +420,8 @@
                     <h2 style="font-size: 1.4rem; color: #fff; margin-bottom: 0.5rem;">Grab Our Button</h2>
                     <div class="grab-card">
                         <!-- Replace src with your actual button file path -->
-                        <img src="https://via.placeholder.com/88x31/0a4a6e/ffffff?text=Taruu" alt="Taruu's Button" width="88" height="31">
-                        <textarea readonly onclick="this.select()"><a href="https://taruu.dev" target="_blank"><img src="https://taruu.dev/button.gif" width="88" height="31" alt="Taruu"></a></textarea>
+                        <img src="button.svg" alt="Taruu's Button" width="88" height="31">
+                        <textarea readonly onclick="this.select()"><a href="https://taruu.dev" target="_blank"><img src="https://taruu.dev/button.svg" width="88" height="31" alt="Taruu"></a></textarea>
                     </div>
                 </div>
 
