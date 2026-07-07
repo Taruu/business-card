@@ -93,3 +93,5 @@ If you have run out of energy or time for your project, put a note at the top of
 
 
 https://www.minifier.org/html-minifier
+
+https://github.com/j9t/html-minifier-next
