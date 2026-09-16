@@ -298,15 +298,15 @@
         setInterval(()=>{let s=(new Date-10315152e5)/1e3|0,d=s/864e2|0,e=document.getElementById('u');e&&(e.innerText=`My uptime:\n${d}d, ${P(s/36e2%24|0)}h, ${P(s/60%60|0)}m, ${P(s%60)}s\n(${d/365.25|0}y ♍)`)},1e3);
         addEventListener("DOMContentLoaded",()=>{let D=document,g=D.body.appendChild(D.createElement("div")),c=(g.className="bg",g.appendChild(D.createElement("canvas"))),x=c.getContext("2d"),b=[],q=[],C=s=>{let r=R()*40+20;return{r,x:R()*c.width,y:s?c.height+r+R()*50:R()*c.height,vy:-(R()*1.2+.4),w:R()*100,ws:R()*.02+.01,wr:R()*.8+.2}},z=()=>{c.width=innerWidth;c.height=innerHeight;if(!b.length)for(let i=navigator.maxTouchPoints?8:16;i--;)b.push(C())},a=()=>{x.clearRect(0,0,c.width,c.height);b.forEach(o=>{o.y+=o.vy;o.w+=o.ws;o.x+=Math.sin(o.w)*o.wr;if(o.y<-o.r){o.y=c.height+o.r+R()*20;o.x=R()*c.width}let{x:X,y:Y,r:N}=o;x.shadowColor="#0cf6";x.shadowBlur=10;x.beginPath();x.arc(X,Y,N,0,7);x.strokeStyle="#fff6";x.lineWidth=1.5;x.stroke();let ox=X+N*.4,oy=Y+N*.4,rg=x.createRadialGradient(ox,oy,0,ox,oy,N*1.2);rg.addColorStop(0,"#0cf6");rg.addColorStop(.6,"#0cf0");x.fillStyle=rg;x.fill();x.shadowColor="#0000";x.shadowBlur=0;let lg=x.createLinearGradient(X,Y-.9*N,X,Y-.1*N);lg.addColorStop(0,"#fff8");lg.addColorStop(1,"#fff0");x.beginPath();x.ellipse(X,Y-.5*N,.7*N,.4*N,0,0,7);x.fillStyle=lg;x.fill()});for(let i=q.length;i--;){let o=q[i];o.x+=o.vx;o.y+=o.vy;o.vy+=.15;if((o.a-=.035)<=0)q.splice(i,1);else{x.globalAlpha=o.a;x.fillStyle='#fffd';x.beginPath();x.arc(o.x,o.y,o.r,0,7);x.fill()}}x.globalAlpha=1;requestAnimationFrame(a)},H=(X,Y)=>{for(let i=b.length;i--;){let o=b[i],u=o.x-X,v=o.y-Y;if(u*u+v*v<=o.r*o.r){for(let j=8;j--;)q.push({x:o.x,y:o.y,vx:(R()-.5)*6,vy:(R()-.5)*6-2,r:R()*3+1,a:1});p();b[i]=C(1);break}}};onmousedown=e=>H(e.clientX,e.clientY);ontouchstart=e=>{let[t]=e.touches;t&&H(t.clientX,t.clientY)};onresize=z;z();a()});
     </script>
-</head>
+    <script>const FPS=30,W=320,H=240,dataFolder="objects/",camPos=[-30,-355,319],camRot=[3840,1856],SCALE=2048,ONE=4096,FT=1e3/30,sinLUT=new Int16Array(ONE);for(let t=0;t<ONE;t++)sinLUT[t]=2048*Math.sin(2*t*Math.PI/ONE)|0;function isin(t){return sinLUT[4095&t]}function icos(t){return sinLUT[t+1024&4095]}const keys={};function SceneCamera(t,e,n){this.pos=[t,e,n],this.rotY=0,this.rotX=0,this.speed=16,this.rotSpeed=16;const o=this;this.update=function(){(keys.q||keys.Q||keys.PageUp)&&(o.rotX=o.rotX+o.rotSpeed&4095),(keys.e||keys.E||keys.PageDown)&&(o.rotX=o.rotX-o.rotSpeed&4095),keys.ArrowRight&&(o.rotY=o.rotY-o.rotSpeed&4095),keys.ArrowLeft&&(o.rotY=o.rotY+o.rotSpeed&4095);const t=isin(o.rotY),e=icos(o.rotY),n=isin(o.rotX);keys.ArrowUp&&(o.pos[0]-=t*o.speed>>11,o.pos[1]-=n*o.speed>>11,o.pos[2]+=e*o.speed>>11),keys.ArrowDown&&(o.pos[0]+=t*o.speed>>11,o.pos[2]-=e*o.speed>>11,o.pos[1]+=n*o.speed>>11)}}function loadMDL(t){const e=new DataView(t);if(1296321585!==e.getUint32(0,!0))throw"bad MDL";const n=e.getUint16(4,!0),o=e.getUint16(6,!0),s=e.getUint16(8,!0);let r=12;const c=[];for(let t=0;t<n;t++)c.push([e.getInt16(r,!0),e.getInt16(r+2,!0),e.getInt16(r+4,!0)]),r+=6;const i=[];for(let t=0;t<s;t++)i.push([e.getInt16(r,!0),e.getInt16(r+2,!0)]),r+=4;const a=[];for(let t=0;t<o;t++)a.push([e.getInt16(r,!0),e.getInt16(r+2,!0),e.getInt16(r+4,!0),e.getInt16(r+6,!0)]),r+=8;const u=[];for(let t=0;t<o;t++)u.push([e.getInt16(r,!0),e.getInt16(r+2,!0),e.getInt16(r+4,!0),e.getInt16(r+6,!0)]),r+=8;return{verts:c,uvs:i,faces:a,uv_faces:u}}function makeObject(t,e,n){return n=n||{},{verts:t.verts,faces:t.faces,uvs:t.uvs,uv_faces:t.uv_faces,tex:e,pos:n.pos||[0,0,0],rotY:n.rotY||0,rotSpeed:"number"==typeof n.rotSpeed?n.rotSpeed:8}}function loadObj(t,e,n){const o=n||function(t){throw t};let s=null,r=null,c=!1;function i(){if(!c&&s&&r){c=!0;try{e(loadMDL(s),r)}catch(t){o(t)}}}fetch("objects/"+t+".mdl").then(function(t){return t.arrayBuffer()}).then(function(t){s=t,i()}).catch(o);const a=new Image;a.onload=function(){try{const t=a.naturalWidth,e=a.naturalHeight,n=new OffscreenCanvas(t,e).getContext("2d",{willReadFrequently:!0});n.drawImage(a,0,0);const o=n.getImageData(0,0,t,e);r={w:t,h:e,data:new Uint32Array(o.data.buffer)},i()}catch(t){o(t)}},a.onerror=function(){o("failed to load "+t+".webp")},a.src="objects/"+t+".webp"}function loadObjects(t,e,n){const o=new Array(t.length);let s=0,r=!1;if(t.length)for(let c=0;c<t.length;c++)loadObj(t[c],function(n,i){r||(o[c]={mdl:n,texData:i},s++,s===t.length&&e(o))},function(t){r||(r=!0,n&&n(t))});else e(o)}function kellyRenderer(t){let e=0,n=0,o=0,s=0;const r=document.getElementById("screen"),c=r.getContext("2d",{alpha:!0}),i=W/H,a=this,u=c.createImageData(W,H),f=new Uint32Array(u.data.buffer),l=new SceneCamera(camPos[0],camPos[1],camPos[2]);function p(t){return{x:(t.x+2048)*W/4096|0,y:(t.y+2048)*H/4096|0}}function d(t){return{x:2048*t.x/t.z|0,y:t.y*i*2048/t.z|0}}function y(t,e){const n=isin(e.rotY),o=icos(e.rotY);return{x:(t[0]*o-t[2]*n>>11)+e.pos[0],y:t[1]+e.pos[1],z:(t[0]*n+t[2]*o>>11)+e.pos[2]}}function h(t){const e=t.x-l.pos[0],n=t.y-l.pos[1],o=t.z-l.pos[2],s=isin(4095&-l.rotY),r=icos(4095&-l.rotY);let c=e*r-o*s>>11,i=n,a=e*s+o*r>>11;const u=isin(4095&-l.rotX),f=icos(4095&-l.rotX);return{x:c,y:i*f-a*u>>11,z:i*u+a*f>>11}}function g(t,e,n,o,s,r,c){const i=[{x:t.x,y:t.y,u:o[0],v:o[1]},{x:e.x,y:e.y,u:s[0],v:s[1]},{x:n.x,y:n.y,u:r[0],v:r[1]}];i.sort((t,e)=>t.y-e.y);const a=i[0],u=i[1],l=i[2],p=l.y-a.y;if(0===p)return;const d=c.w,y=c.h,h=c.data,g=Math.max(0,0|a.y),x=Math.min(239,0|l.y);for(let t=g;t<=x;t++){let e,n,o;if(t<u.y&&u.y!==a.y){const s=(t-a.y)/(u.y-a.y);e=a.x+(u.x-a.x)*s,n=a.u+(u.u-a.u)*s,o=a.v+(u.v-a.v)*s}else{const s=(t-u.y)/(l.y-u.y||1);e=u.x+(l.x-u.x)*s,n=u.u+(l.u-u.u)*s,o=u.v+(l.v-u.v)*s}const s=(t-a.y)/p;let r=a.x+(l.x-a.x)*s,c=a.u+(l.u-a.u)*s,i=a.v+(l.v-a.v)*s;e>r&&([e,r]=[r,e],[n,c]=[c,n],[o,i]=[i,o]);const g=Math.max(0,0|e),x=Math.min(319,0|r);if(g>x)continue;const m=r-e||1,w=(c-n)/m,v=(i-o)/m;let k=n+(g-e)*w,b=o+(g-e)*v;const I=t*W;for(let t=g;t<=x;t++){let e=0|k,n=0|b;e=(e%d+d)%d,n=(n%y+y)%y;const o=h[n*d+e];o>>>24&&(f[I+t]=o),k+=w,b+=v}}}function x(t,e){const n=t.tex;for(let o=0;o<t.faces.length;o++){const s=t.faces[o],r=t.uv_faces[o]||s,c=[],i=[],a=[];let u=!1;for(let e=0;e<4&&-1!==s[e];e++){let n=h(y(t.verts[s[e]],t));if(n.z<64){u=!0;break}c.push(p(d(n))),i.push(t.uvs[r[e]]||[0,0]),a.push(n.z)}if(u||c.length<3)continue;const f=3===c.length?(a[0]+a[1]+a[2])/3:(a[0]+a[1]+a[2]+a[3])/4;e.push({z:f,tex:n,p0:c[0],p1:c[1],p2:c[2],u0:i[0],u1:i[1],u2:i[2]}),4===c.length&&e.push({z:f,tex:n,p0:c[1],p1:c[3],p2:c[2],u0:i[1],u1:i[3],u2:i[2]})}}function m(t){let r=t-e;r>250&&(r=FT,e=t-FT),r>=FT&&(e+=FT,a.update(),o++),t-s>=1e3&&(n=o,o=0,s=t),requestAnimationFrame(m)}l.rotX=camRot[0],l.rotY=camRot[1],this.update=function(){l.update(),f.fill(0);const e=[];for(let n=0;n<t.length;n++){const o=t[n];o.rotY=o.rotY+o.rotSpeed&4095,x(o,e)}e.sort(function(t,e){return e.z-t.z});for(let t=0;t<e.length;t++){const n=e[t];g(n.p0,n.p1,n.p2,n.u0,n.u1,n.u2,n.tex)}c.putImageData(u,0,0),c.fillStyle="#000000",c.font="9px Courier New",c.textBaseline="top",c.fillText("POS:"+(0|l.pos[0])+","+(0|l.pos[1])+","+(0|l.pos[2])+" ROT:Y"+l.rotY+" X"+l.rotX,8,8),c.fillText("FPS:"+n+"  tris:"+e.length+"  objs:"+t.length,8,16),c.fillText("demo by NC22",250,228)},this.init=function(){r.width=W,r.height=H,requestAnimationFrame(m)}}window.addEventListener("keydown",function(t){keys[t.key]=!0}),window.addEventListener("keyup",function(t){keys[t.key]=!1}),loadObjects(["fox","mice"],function(t){var e=[];e.push(makeObject(t[0].mdl,t[0].texData,{pos:[0,0,0],rotY:2048,rotSpeed:8})),e.push(makeObject(t[1].mdl,t[1].texData,{pos:[-320,0,60],rotY:2048,rotSpeed:-14})),new kellyRenderer(e).init()},function(t){document.body.insertAdjacentHTML("beforeend",'<pre style="color:#f88">'+t+"</pre>")})</script>
+    </head>
 <body>
 
 <div class="h">
 
     <!-- Sidebar block with the inline image and uptime indicator -->
     <div class="i s">
-        <img src="assets/images/purtaruu.webp" alt="Project illustration">
-        <div id="u">My uptime: loading...</div>
+        <canvas id=screen style="image-rendering:pixelated;image-rendering:crisp-edges;background:url(assets/images/bg2.webp) 50%/cover;border:2px solid #fff;width:640px"></canvas>
     </div>
 
     <div class="v">
@@ -330,9 +330,9 @@
                             <span class="badge-name">Thero</span>
                         </a>
 
-                        <a href="https://github.com/bropines" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/buts/bropines.svg" alt="bropines">
-                            <span class="badge-name">Bropines</span>
+                        <a href="https://txlyre.website" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/txlyre.gif" alt="txlyre">
+                            <span class="badge-name">txlyre</span>
                         </a>
 
                         <a href="https://lappee.site" class="badge-item" target="_blank" rel="noopener noreferrer">
@@ -340,15 +340,22 @@
                             <span class="badge-name">Lappee</span>
                         </a>
 
-                        <a href="https://txlyre.website" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/buts/txlyre.gif" alt="txlyre">
-                            <span class="badge-name">txlyre</span>
-                        </a>
-
                         <a href="https://verncat.dev/" class="badge-item" target="_blank" rel="noopener noreferrer">
-                            <img src="assets/buts/verncat.gif" alt="txlyre">
+                            <img src="assets/buts/verncat.gif" alt="verncat">
                             <span class="badge-name">Vern</span>
                         </a>
+
+                        <a href="https://github.com/NC22" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/NC22_10kb.gif" alt="NC22">
+                            <span class="badge-name">NC22</span>
+                        </a>
+
+                        <a href="https://bropinus.ru/" class="badge-item" target="_blank" rel="noopener noreferrer">
+                            <img src="assets/buts/bropines.svg" alt="bropines">
+                            <span class="badge-name">Bropines</span>
+                        </a>
+
+
 
 
                     </div>
