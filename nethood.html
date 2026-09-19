@@ -273,6 +273,7 @@
             }
 
             .m { min-height: 300px; }
+            .s canvas {max-width: 355px}
         }
 
         .bg {
@@ -292,6 +293,10 @@
             height: 100vh;
             display: block;
         }
+
+        .webdemo canvas {
+
+          }
     </style>
     <script>
         let P=n=>(''+n).padStart(2,0),A,R=Math.random,p=()=>{A=A||new AudioContext;A.state=='suspended'&&A.resume();try{let o=A.createOscillator(),g=A.createGain(),t=A.currentTime,E=t+.08,S=(m,v,r)=>(m.setValueAtTime(v,t),m.exponentialRampToValueAtTime(r,E));S(o.frequency,150,800);S(g.gain,.12,.01);o.connect(g).connect(A.destination);o.start();o.stop(E)}catch{}};
@@ -306,7 +311,7 @@
 
     <!-- Sidebar block with the inline image and uptime indicator -->
     <div class="i s">
-        <canvas id=screen style="image-rendering:pixelated;image-rendering:crisp-edges;background:url(assets/images/bg2.webp) 50%/cover;border:2px solid #fff;width:640px"></canvas>
+        <canvas id=screen style="image-rendering:pixelated;image-rendering:crisp-edges;background:url(assets/images/bg2.webp) 50%/cover;width:640px"></canvas>
     </div>
 
     <div class="v">
